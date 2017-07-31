@@ -1,0 +1,65 @@
+/* Tiny Carousel */
+.slider_chay {
+   /* height: 1%;*/
+    margin: 30px auto 0;
+    position: relative;
+    max-width: 800px;
+}
+
+.slider_chay .viewport {
+    height: 302px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider_chay .buttons {
+    background: #1b9ed9;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+    font-size: 22px;
+    z-index: 1000;
+    opacity: 0.8;
+}
+
+.slider_chay .next {
+    right: 0;
+    left: auto;
+    top: 50%;
+    z-index: 10000;
+}
+
+.slider_chay .buttons:hover {
+    color: #C01313;
+    background: #2613b1;
+}
+
+.slider_chay .disable {
+    visibility: hidden;
+}
+
+.slider_chay .overview {
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 240px;
+    left: 0;
+    top: 0;
+}
+
+.slider_chay .overview li {
+    float: left;
+    margin: 0 19px 0 0;
+    padding: 1px;
+    height: 302px;
+    width: 236px;
+ }

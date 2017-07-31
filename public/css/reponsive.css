@@ -1,0 +1,342 @@
+@media (min-width: 980px) and (max-width: 1190px){
+
+}
+@media (min-width: 768px) and (max-width: 979px){
+
+    .col-sm-10{
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .ft-bottom{
+        width: 50%;
+    }
+    .ft-bottom span{
+        text-align: left;
+    }
+    .header-in .col-sm-9{
+        width: 100%;
+    }
+    .nav.navbar-nav{
+
+        margin: 0;
+    }
+    .navbar-brand{
+        height: 44px;
+    }
+    .nav > li > a{
+        color: #fff;
+    }
+    .p-images img{
+        width: 80%;
+    }
+    .support-item img{
+        margin-right: 10px;
+    }
+    .item-medal a{
+        margin: 7px 4px;
+    }
+    #faebook-inner{
+        display: none;
+    }
+
+    .img-mobile{
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px auto;
+    }
+    .img-mobile img{
+        width: 90%;
+    }
+    .product-detail-des{
+        width: 100%;
+    }
+    .slider-images{
+        display: none;
+    }
+    .img-mobile{
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px auto;
+    }
+    .img-mobile img{
+        width: 90%;
+    }
+    .breadcrumb-page{
+        padding-left: 10px;
+    }
+    .p-images img{
+        width: 90% !important;
+    }
+
+}
+@media (min-width: 560px) and (max-width: 767px){
+
+    .dropdown-content {
+        position: relative !important;
+        right: 0px !important;
+    }
+    .col-sm-10{
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .col-sm-3 .producthome-item{
+        margin:20px 0 !important;
+    }
+    .ft-bottom{
+        width: 40%;
+    }
+    .ft-bottom span{
+        text-align: left;
+    }
+    #faebook-inner{
+        display: none;
+    }
+    .img-mobile{
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px auto;
+    }
+    .img-mobile img{
+        width: 90%;
+    }
+    .product-detail-des{
+        width: 100%;
+    }
+    .slider-images{
+        display: none;
+    }
+    .img-mobile{
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px auto;
+    }
+    .img-mobile img{
+        width: 90%;
+    }
+    .breadcrumb-page{
+        padding-left: 10px;
+    }
+    .box-news{
+        display: none;
+    }
+    .box-category{
+        display: none;
+    }
+    .box-category{
+        display: none;
+    }
+    .detail-new p img{
+        width: 80%;
+        height: 100%;
+    }
+    .detail-new{
+        padding: 5px;
+    }
+    .conent-bottom .col-sm-3{
+        margin: 0 5px;
+    }
+
+}
+@media (min-width: 480px) and (max-width: 560px){
+    .form-model2  label{
+        float: left;
+        width: 100%;
+        padding-right: 15px;
+        text-align: center;
+    }
+    .form-model  label{
+        float: left;
+        width: 100%;
+        padding-right: 15px;
+        text-align: center;
+    }
+    #downloadQr{
+        margin-left: 30%;
+
+    }
+    #infoShow{
+        text-align: center;
+    }
+    .form-control{
+        width: 100%;
+    }
+    .dropdown-content {
+        position: relative !important;
+        right: 0px !important;
+    }
+    .col-sm-10{
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .ft-bottom{
+        width: 40%;
+    }
+    #faebook-inner{
+        display: none;
+    }
+    .img-mobile{
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px auto;
+    }
+    .img-mobile img{
+        width: 90%;
+    }
+    .product-detail-des{
+        width: 100%;
+    }
+    .slider-images{
+        display: none;
+    }
+    .img-mobile{
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px auto;
+    }
+    .img-mobile img{
+        width: 90%;
+    }
+    .breadcrumb-page{
+        padding-left: 10px;
+    }
+    .box-news{
+        display: none;
+    }
+    .detail-new p img{
+        width: 80%;
+        height: 100%;
+    }
+    .box-category{
+        display: none;
+    }
+    .detail-new{
+        padding: 5px;
+    }
+    .conent-bottom .col-sm-3{
+        margin: 0 5px;
+    }
+    .new-home img{
+        width: 100px;
+    }
+}
+@media (max-width: 470px){
+    .form-model2  label{
+        float: left;
+        width: 100%;
+        padding-right: 15px;
+        text-align: center;
+    }
+    .form-model  label{
+        float: left;
+        width: 100%;
+        padding-right: 15px;
+        text-align: center;
+    }
+    #infoShow{
+        text-align: center;
+    }
+    .form-control{
+        width: 100%;
+    }
+    .bookImg{
+        width: 250px;
+        height: 200px;
+        border: 1px solid black;
+    }
+    #QrCode{
+        width: 250px;
+        height: 200px;
+        border: 1px solid black;
+    }
+    .Qrform{
+        margin-left: 0%;
+    }
+    #outdiv {
+        width: 200px;
+        height: 200px;
+        border: solid;
+        border-width: 3px 3px 3px 3px;
+    }
+    #downloadQr{
+        margin-left: 30%;
+
+    }
+    #v {
+        width: 200px;
+        height: 200px;
+    }
+    .navbar-brand{
+
+        padding: 9px;
+    }
+    .dropdown-content {
+        position: relative !important;
+        right: 0px !important;
+    }
+
+    .col-sm-10{
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .col-sm-3 .producthome-item{
+        margin:20px 0 !important;
+    }
+    .ft-bottom{
+        width: 28%;
+    }
+    .ft-bottom span{
+        text-align: left;
+    }
+    #faebook-inner{
+        display: none;
+    }
+
+    .img-mobile{
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px auto;
+    }
+    .img-mobile img{
+        width: 90%;
+    }
+    .product-detail-des{
+        width: 100%;
+    }
+    .slider-images{
+        display: none;
+    }
+    .img-mobile{
+        display: block;
+        width: 90%;
+        margin: 0 auto 10px auto;
+    }
+    .img-mobile img{
+        width: 90%;
+    }
+
+    .breadcrumb-page{
+        padding-left: 10px;
+    }
+    .box-news{
+        display: none;
+    }
+    .box-category{
+        display: none;
+    }
+    .detail-new p img{
+        width: 80%;
+        height: 100%;
+    }
+    .box-category{
+        display: none;
+    }
+    .detail-new{
+        padding: 5px;
+    }
+    .conent-bottom .col-sm-3{
+        margin: 0 5px;
+    }
+    .new-home img{
+        width: 100px;
+    }
+}
