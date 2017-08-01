@@ -4,10 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/html/blog/resources/views/Bookview.blade.php</file>
-            <file>file:/var/www/html/blog/resources/views/KhachView.blade.php</file>
-            <file>file:/var/www/html/blog/public/index.php</file>
-            <file>file:/var/www/html/blog/config/database.php</file>
-            <file>file:/var/www/html/blog/app/Http/Controllers/AjaxController.php</file>
+            <file>file:/var/www/html/blog/routes/web.php</file>
         </group>
     </open-files>
 </project-private>

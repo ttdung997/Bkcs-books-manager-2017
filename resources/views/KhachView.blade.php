@@ -117,7 +117,7 @@
             <a class="paginate_button" href="/khachview/<?= $i ?>"><?= $i ?></a>
         <?php } ?>
         <?php if ($page != intval(($count - 1) / 5) + 1) { ?><a class="paginate_button previous disabled" href="/khachview/<?= $page + 1 ?>" >Sau »</a><?php } ?>
-        <form action="/pageNumberB" method="get">
+        <form action="/pageNumberC" method="get">
 
             <label>Trang: </label>
             <input style="width: 20px;s" class="inputnumber" name="number" type="text">
@@ -177,7 +177,6 @@
         });
     }
     function updateC() {
-    alert('da goi ham');
         function updatechange(id) {
             var data = document.getElementById("ele" + id);
             var name = document.getElementsByName('name')[0].value.toString();
