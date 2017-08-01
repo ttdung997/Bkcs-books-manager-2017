@@ -113,13 +113,15 @@ class AjaxController extends Controller {
     }
 
     public function updateC() {
-        echo  $_POST['id'].'<br>';
-        echo  $_POST['name'].'<br>';
-        echo  $_POST['phone_number'].'<br>';
-        echo  $_POST['book_name'].'<br>';
-        echo  $_POST['Lend_date'].'<br>';
-        echo  $_POST['Pay_date'].'<br>';
-        
+        $msg = '';
+        $msg = $msg . $_POST['id'] . '<br>';
+        $msg = $msg . $_POST['name'] . '<br>';
+        $msg = $msg . $_POST['phone_number'] . '<br>';
+        $msg = $msg . $_POST['book_name'] . '<br>';
+        $msg = $msg . $_POST['Lend_date'] . '<br>';
+        $msg = $msg . $_POST['Pay_date'] . '<br>';
+        return response()->json(array('msg' => $msg), 200);
+
 //        $customer = DB::table('customer')->where('id', $_POST['id'])->first();
 //        $query = DB::table('book')->where('name', $customer->book_name)->update(['check' => 0]);
 //
@@ -473,8 +475,7 @@ class AjaxController extends Controller {
         } else {
             $msg = "Đã có người mượn sách";
         }
-         return response()->json(array('msg' => $msg), 200);
-        
+        return response()->json(array('msg' => $msg), 200);
     }
 
 }
