@@ -144,10 +144,10 @@ class AjaxController extends Controller {
                 ->where('id', $_POST['id'])->update(['phone_number' => $_POST['phone_number']]);
          $que = DB::table('customer')
                 ->where('id', $_POST['id'])->update(['book_name' => $_POST['book_name']]);
-//         $que = DB::table('customer')
-//                ->where('id', $_POST['id'])->update(['Lend_date' => $_POST['Lend_date']]);
-//         $que = DB::table('customer')
-//                ->where('id', $_POST['id'])->update(['Pay_date' => $_POST['Pay_date']]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['Lend_date' => $_POST['Lend_date']]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['Pay_date' => $_POST['Pay_date']]);
 //         $que = DB::table('customer')
 //                ->where('id', $_POST['id'])->update(['updated_at' =>  date("Y-m-d h:i:sa")]);
         
