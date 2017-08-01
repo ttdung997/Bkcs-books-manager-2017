@@ -42,7 +42,7 @@ class UploadController extends Controller {
             $file = Input::file('file');
             $file->move(base_path() . $upload_folder, $file->getClientOriginalName());
             echo $file->getClientOriginalName();
-            echo '<img src="http://35.192.32.4/uploads/'.$file->getClientOriginalName().'">'
+            echo '<img src="http://35.192.32.4/uploads/'.$file->getClientOriginalName().'">';
 //            $query = DB::table('book')->insert([
 //                [
 //                    'name' => $request->name,
@@ -54,7 +54,7 @@ class UploadController extends Controller {
 //                    'created_at' => date("Y-m-d h:i:s"),
 //                    'updated_at' => date("Y-m-d h:i:s"),]
 //            ]);
-//        }
+        }
 //        if($query) echo 'da in thanh cong';
         //return redirect('Bookview/1');
     }
