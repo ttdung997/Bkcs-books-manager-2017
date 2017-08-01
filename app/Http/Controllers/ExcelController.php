@@ -55,7 +55,7 @@ class ExcelController extends Controller {
         $info = "";
         $info = ' <label>Chọn dữ liệu theo tháng</label>
             <br>
-                <form action="http://lara.dev/CustomerExport" method="post" accept-charset = "UTF-8" class = "form" >
+                <form action="http://35.192.32.4/CustomerExport" method="post" accept-charset = "UTF-8" class = "form" >
                 <input name = "_token" type = "hidden" value = "' . csrf_token() . '"">
                 <input name="_token" type="hidden" value="' . csrf_token() . '">
                 <div class="form-group form-model2">
