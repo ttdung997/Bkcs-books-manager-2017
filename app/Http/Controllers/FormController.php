@@ -35,6 +35,7 @@ class FormController extends Controller {
     }
 
     public function customerStore(Request $request) {
+        echo $request->name.$request->book_name;
         $query = DB::table('customer')->insert([
             ['name' => $request->name,
                 'phone_number' => $request->phone_number,
@@ -46,7 +47,7 @@ class FormController extends Controller {
                 'updated_at' => $request->updated_at,]
         ]);
 
-        return redirect('quanlykhach');
+        //return redirect('quanlykhach');
     }
     public function pageNumberB(Request $request) {
         $number=$request->number;
