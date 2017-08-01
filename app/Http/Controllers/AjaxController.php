@@ -126,21 +126,23 @@ class AjaxController extends Controller {
         $customer = DB::table('customer')->where('id', $_POST['id'])->first();
         $query = DB::table('book')->where('name', $customer->book_name)->update(['check' => 0]);
 
-        $que = DB::table('customer')
-                ->where('id', $_POST['id'])
-                ->update(['name' => $_POST['name'],
-            'phone_number' => $_POST['phone_number'],
-            'book_name' => $_POST['book_name'],
-            'check' => 2,
-            'Lend_date' => $_POST['Lend_date'],
-            'Pay_date' => $_POST['Pay_date'],
-            'updated_at' => date("Y-m-d h:i:sa"),
-        ]);
+//        $que = DB::table('customer')
+//                ->where('id', $_POST['id'])
+//                ->update(['name' => $_POST['name'],
+//            'phone_number' => $_POST['phone_number'],
+//            'book_name' => $_POST['book_name'],
+//            'check' => 2,
+//            'Lend_date' => $_POST['Lend_date'],
+//            'Pay_date' => $_POST['Pay_date'],
+//            'updated_at' => date("Y-m-d h:i:sa"),
+//        ]);
         $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
-        if ($que) {
+        if ($query) {
             $msg = "Đã cập nhật dữ liệu thành công ";
         } else {
-            $msg = "Đã có lỗi trong quá trính cập nhật ";
+            DB::connection()->enableQueryLog();
+            $queries = DB::getQueryLog();
+            $msg = $queries;
         }
         return response()->json(array('msg' => $msg), 200);
     }
