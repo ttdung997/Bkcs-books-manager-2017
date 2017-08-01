@@ -324,8 +324,9 @@ class AjaxController extends Controller {
                 'check' => 2,
                 'Lend_date' => $_POST['Lend_date'],
                 'Pay_date' => $_POST['Pay_date'],
-                'created_at' => date("Y-m-d h:i:sa"),
-                'updated_at' => date("Y-m-d h:i:sa"),]
+//                'created_at' => date("Y-m-d h:i:sa"),
+//                'updated_at' => date("Y-m-d h:i:sa"),
+                ]
         ]);
         $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
         $msg = "Đã thêm bản ghi thành công";
