@@ -41,19 +41,21 @@ class UploadController extends Controller {
         if (Input::hasFile('file')) {
             $file = Input::file('file');
             $file->move(base_path() . $upload_folder, $file->getClientOriginalName());
-            $query = DB::table('book')->insert([
-                [
-                    'name' => $request->name,
-                    'type' => $request->type,
-                    'Publication_date' => $request->publication,
-//                    'img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName(),
-                    'img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName(),
-                    'check' => 0,
-                    'created_at' => date("Y-m-d h:i:s"),
-                    'updated_at' => date("Y-m-d h:i:s"),]
-            ]);
-        }
-        if($query) echo 'da in thanh cong';
+            echo $file->getClientOriginalName();
+            echo '<img src="http://35.192.32.4/uploads/'.$file->getClientOriginalName().'">'
+//            $query = DB::table('book')->insert([
+//                [
+//                    'name' => $request->name,
+//                    'type' => $request->type,
+//                    'Publication_date' => $request->publication,
+////                    'img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName(),
+//                    'img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName(),
+//                    'check' => 0,
+//                    'created_at' => date("Y-m-d h:i:s"),
+//                    'updated_at' => date("Y-m-d h:i:s"),]
+//            ]);
+//        }
+//        if($query) echo 'da in thanh cong';
         //return redirect('Bookview/1');
     }
 
