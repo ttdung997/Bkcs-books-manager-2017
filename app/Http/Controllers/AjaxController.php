@@ -114,12 +114,13 @@ class AjaxController extends Controller {
 
     public function updateC() {
         $msg = '';
-        $msg = $msg . $_POST['id'] . '<br>';
-        $msg = $msg . $_POST['name'] . '<br>';
-        $msg = $msg . $_POST['phone_number'] . '<br>';
-        $msg = $msg . $_POST['book_name'] . '<br>';
-        $msg = $msg . $_POST['Lend_date'] . '<br>';
-        $msg = $msg . $_POST['Pay_date'] . '<br>';
+//        $msg = $msg . $_POST['id'] . '<br>';
+//        $msg = $msg . $_POST['name'] . '<br>';
+//        $msg = $msg . $_POST['phone_number'] . '<br>';
+//        $msg = $msg . $_POST['book_name'] . '<br>';
+//        $msg = $msg . $_POST['Lend_date'] . '<br>';
+//        $msg = $msg . $_POST['Pay_date'] . '<br>';
+        $msg = $msg . 'Tóm lại là lỗi cái vẹo gì?'. '<br>';
         return response()->json(array('msg' => $msg), 200);
 
 //        $customer = DB::table('customer')->where('id', $_POST['id'])->first();
@@ -156,7 +157,7 @@ class AjaxController extends Controller {
         $book = DB::table('book')->where('id', $n)->get();
         $info = "";
         if ($book[0]->img == NULL) {
-            $img = "http://lara.dev/uploads/updateting.jpg";
+            $img = "http://35.192.32.4/uploads/updateting.jpg";
         } else
             $img = $book[0]->img;
         $info = '<div class="form-group form-model">
@@ -192,7 +193,7 @@ class AjaxController extends Controller {
         $book = DB::table('book')->where('id', $n)->get();
         list($year, $month, $day) = explode('-', $book[0]->Publication_date);
         if ($book[0]->img == NULL) {
-            $img = "http://lara.dev/uploads/updateting.jpg";
+            $img = "http://35.192.32.4/uploads/updateting.jpg";
         } else
             $img = $book[0]->img;
 
@@ -389,7 +390,7 @@ class AjaxController extends Controller {
             $insert_line = ' <td>' . (intval($count / 5) + 1) . '</td>
                 <td>' . $_POST['name'] . '</td>
                 <td>' . $_POST['type'] . '</td>
-                <td>' . $_POST['publication'] . '</td>
+                <td>Đang cập nhật</td>
                 <td onmouseenter="an()">
                     <a onclick="getInfo(' . $id . ')" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myModal">
                         <span style="color: #337ab7" class="glyphicon glyphicon-eye-open">

@@ -177,6 +177,7 @@
         });
     }
     function updateC() {
+    alert('da goi ham');
         function updatechange(id) {
             var data = document.getElementById("ele" + id);
             var name = document.getElementsByName('name')[0].value.toString();

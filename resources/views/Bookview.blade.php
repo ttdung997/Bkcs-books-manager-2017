@@ -233,7 +233,7 @@
             var date = document.getElementsByName('publication')[0].value.toString();
             data.children[1].textContent = name;
             data.children[2].textContent = type;
-            data.children[3].textContent = date;
+            data.children[3].textContent = 'Đang cập nhật';
         }
         var id = document.getElementsByName('id')[0].value;
         var form = $('#bookform')[0];
