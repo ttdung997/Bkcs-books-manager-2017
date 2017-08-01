@@ -36,7 +36,7 @@ class UploadController extends Controller {
     }
 
     public function BookuploadForm(Request $request) {
-
+        echo "1234";
         $upload_folder = '/public/uploads/';
         if (Input::hasFile('file')) {
             $file = Input::file('file');
