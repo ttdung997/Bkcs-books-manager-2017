@@ -55,7 +55,7 @@ class FormController extends Controller {
     }
     public function pageNumberC(Request $request) {
         $number=$request->number;
-         return redirect('Bookview/'.$number);
+         return redirect('khachview/'.$number);
     }
 
 }
