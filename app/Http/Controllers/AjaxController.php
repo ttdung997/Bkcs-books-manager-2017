@@ -114,12 +114,12 @@ class AjaxController extends Controller {
 
     public function updateC() {
         $msg = '';
-//        $msg = $msg . $_POST['id'] . '<br>';
-//        $msg = $msg . $_POST['name'] . '<br>';
-//        $msg = $msg . $_POST['phone_number'] . '<br>';
-//        $msg = $msg . $_POST['book_name'] . '<br>';
-//        $msg = $msg . $_POST['Lend_date'] . '<br>';
-//        $msg = $msg . $_POST['Pay_date'] . '<br>';
+        $msg = $msg . $_POST['id'] . '<br>';
+        $msg = $msg . $_POST['name'] . '<br>';
+        $msg = $msg . $_POST['phone_number'] . '<br>';
+        $msg = $msg . $_POST['book_name'] . '<br>';
+        $msg = $msg . $_POST['Lend_date'] . '<br>';
+        $msg = $msg . $_POST['Pay_date'] . '<br>';
         $msg = $msg . 'Tóm lại là lỗi cái vẹo gì?'. '<br>';
         return response()->json(array('msg' => $msg), 200);
 
