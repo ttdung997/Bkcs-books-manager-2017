@@ -128,21 +128,6 @@ class AjaxController extends Controller {
             'updated_at' => date("Y-m-d h:i:s"),
         ]);
         
-//        $que = DB::table('customer')
-//                        ->where('id', $_POST['id'])->update(['check' => 2]);
-//        $que = DB::table('customer')
-//                        ->where('id', $_POST['id'])->update(['name' => $_POST['name']]);
-//        $que = DB::table('customer')
-//                        ->where('id', $_POST['id'])->update(['phone_number' => $_POST['phone_number']]);
-//        $que = DB::table('customer')
-//                        ->where('id', $_POST['id'])->update(['book_name' => $_POST['book_name']]);
-//        $que = DB::table('customer')
-//                        ->where('id', $_POST['id'])->update(['Lend_date' => $_POST['Lend_date']]);
-//        $que = DB::table('customer')
-//                        ->where('id', $_POST['id'])->update(['Pay_date' => $_POST['Pay_date']]);
-////        $que = DB::table('customer')
-////                        ->where('id', $_POST['id'])->update(['updated_at' => date("Y-m-d h:i:sa")]);
-//
         $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
         if ($que) {
             $msg = "Đã cập nhật dữ liệu thành công ";
@@ -247,7 +232,7 @@ class AjaxController extends Controller {
                 ->update(['name' => $_POST['name'],
             'type' => $_POST['type'],
             'Publication_date' => $_POST['publication'],
-            'updated_at' => date("Y-m-d h:i:sa"),
+            'updated_at' => date("Y-m-d h:i:s"),
         ]);
         if ($que) {
             $msg = "Đã cập nhật dữ liệu thành công ";
@@ -389,8 +374,8 @@ class AjaxController extends Controller {
                 'type' => $_POST['type'],
                 'Publication_date' => $_POST['publication'],
                 'check' => 0,
-                'created_at' => date("Y-m-d h:i:sa"),
-                'updated_at' => date("Y-m-d h:i:sa"),]
+                'created_at' => date("Y-m-d h:i:s"),
+                'updated_at' => date("Y-m-d h:i:s"),]
         ]);
         $id = DB::table('book')->max('id');
         $msg = "Đã thêm đầu sách thành công";

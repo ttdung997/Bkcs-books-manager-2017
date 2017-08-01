@@ -49,8 +49,8 @@ class UploadController extends Controller {
 //                    'img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName(),
                     'img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName(),
                     'check' => 0,
-                    'created_at' => date("Y-m-d h:i:sa"),
-                    'updated_at' => date("Y-m-d h:i:sa"),]
+                    'created_at' => date("Y-m-d h:i:s"),
+                    'updated_at' => date("Y-m-d h:i:s"),]
             ]);
         }
         return redirect('Bookview/1');
@@ -84,8 +84,8 @@ class UploadController extends Controller {
                     'type' => $request->type,
                     'Publication_date' => $request->publication,
                     'check' => 0,
-                    'created_at' => date("Y-m-d h:i:sa"),
-                    'updated_at' => date("Y-m-d h:i:sa"),]
+                    'created_at' => date("Y-m-d h:i:s"),
+                    'updated_at' => date("Y-m-d h:i:s"),]
         );
         if ($que) {
             $msg = "Đã cập nhật dữ liệu thành công ";
