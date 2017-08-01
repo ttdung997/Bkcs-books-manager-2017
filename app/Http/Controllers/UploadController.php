@@ -38,8 +38,8 @@ class UploadController extends Controller {
     public function BookuploadForm(Request $request) {
         echo "1234";
         $upload_folder = '/public/uploads/';
-        if (Input::hasFile('file')) {
-            $file = Input::file('file');
+        if ($request->file) {
+            $file =$request->file;
             $file->move(base_path() . $upload_folder, $file->getClientOriginalName());
             echo $file->getClientOriginalName();
             echo '<img src="http://35.192.32.4/uploads/'.$file->getClientOriginalName().'">';
