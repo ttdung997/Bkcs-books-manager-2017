@@ -53,7 +53,7 @@ class ExcelController extends Controller {
 
     public function seleteDate() {
         $info = "";
-        $info = ' <label>Chọn dữ liệu theo tháng</label>
+        $info = ' <label>Chọn dữ liệu theo tháng trong năm</label>
             <br>
                 <form action="http://35.192.32.4/CustomerExport" method="post" accept-charset = "UTF-8" class = "form" >
                 <input name = "_token" type = "hidden" value = "' . csrf_token() . '"">
