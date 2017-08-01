@@ -41,7 +41,7 @@ return [
 
         'mysql' => [
              'driver'    => 'mysql',
-                'host'      => 'localhost',
+                'host'      => '127.0.0.1',
                 'database'  => 'BKCS_Book',
                 'username'  => 'root',
                 'password'  => 'dungtt123',
