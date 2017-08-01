@@ -46,7 +46,8 @@ class UploadController extends Controller {
                     'name' => $request->name,
                     'type' => $request->type,
                     'Publication_date' => $request->publication,
-                    'img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName(),
+//                    'img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName(),
+                    'img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName(),
                     'check' => 0,
                     'created_at' => date("Y-m-d h:i:sa"),
                     'updated_at' => date("Y-m-d h:i:sa"),]
@@ -73,7 +74,8 @@ class UploadController extends Controller {
             })->save($destinationPath . '/' . $input['imagename']);
             $que = DB::table('book')
                     ->where('id', $request->id)
-                    ->update(['img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName()]);
+//                    ->update(['img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName()]);
+                   ->update(['img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName()]);
         }
         $que = DB::table('book')
                 ->where('id', $request->id)
