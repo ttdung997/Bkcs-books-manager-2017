@@ -121,29 +121,34 @@ class AjaxController extends Controller {
 //        $msg = $msg . $_POST['Lend_date'] . '<br>';
 //        $msg = $msg . $_POST['Pay_date'] . '<br>';
 //        $msg = $msg . 'Tóm lại là lỗi cái vẹo gì?'. '<br>';
- //       return response()->json(array('msg' => $msg), 200);
-
+        //       return response()->json(array('msg' => $msg), 200);
+        $msg = 'no error';
         $customer = DB::table('customer')->where('id', $_POST['id'])->first();
         $query = DB::table('book')->where('name', $customer->book_name)->update(['check' => 0]);
-
-        $que = DB::table('customer')
-                ->where('id', $_POST['id'])
-                ->update(['name' => $_POST['name'],
-            'phone_number' => $_POST['phone_number'],
-            'book_name' => $_POST['book_name'],
-            'check' => 2,
-            'Lend_date' => $_POST['Lend_date'],
-            'Pay_date' => $_POST['Pay_date'],
-            'updated_at' => date("Y-m-d h:i:sa"),
-        ]);
-        $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
-        if ($que) {
-            $msg = "Đã cập nhật dữ liệu thành công ";
-        } else {
-            DB::connection()->enableQueryLog();
-            $queries = DB::getQueryLog();
-            $msg = $queries;
+        try {
+            $que = DB::table('customer')
+                    ->where('id', $_POST['id'])
+                    ->update(['name' => $_POST['name'],
+                'phone_number' => $_POST['phone_number'],
+                'book_name' => $_POST['book_name'],
+                'check' => 2,
+                'Lend_date' => $_POST['Lend_date'],
+                'Pay_date' => $_POST['Pay_date'],
+                'updated_at' => date("Y-m-d h:i:sa"),
+            ]);
+        } catch (\Illuminate\Database\QueryException $ex) {
+            dd($ex->getMessage());
+            $msg = dd($ex->getMessage());
+            // Note any method of class PDOException can be called on $ex.
         }
+//        $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
+//        if ($que) {
+//            $msg = "Đã cập nhật dữ liệu thành công ";
+//        } else {
+//            DB::connection()->enableQueryLog();
+//            $queries = DB::getQueryLog();
+//            $msg = $queries;
+//        }
         return response()->json(array('msg' => $msg), 200);
     }
 
