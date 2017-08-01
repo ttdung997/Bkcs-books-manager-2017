@@ -125,30 +125,40 @@ class AjaxController extends Controller {
         $msg = 'no error';
         $customer = DB::table('customer')->where('id', $_POST['id'])->first();
         $query = DB::table('book')->where('name', $customer->book_name)->update(['check' => 0]);
-        try {
-            $que = DB::table('customer')
-                    ->where('id', $_POST['id'])
-                    ->update(['name' => $_POST['name'],
-                'phone_number' => $_POST['phone_number'],
-                'book_name' => $_POST['book_name'],
-                'check' => 2,
-                'Lend_date' => $_POST['Lend_date'],
-                'Pay_date' => $_POST['Pay_date'],
-                'updated_at' => date("Y-m-d h:i:sa"),
-            ]);
-        } catch (\Illuminate\Database\QueryException $ex) {
-            dd($ex->getMessage());
-            $msg = dd($ex->getMessage());
-            // Note any method of class PDOException can be called on $ex.
+
+//        $que = DB::table('customer')
+//                ->where('id', $_POST['id'])
+//                ->update(['name' => $_POST['name'],
+//            'phone_number' => $_POST['phone_number'],
+//            'book_name' => $_POST['book_name'],
+//            'check' => 2,
+//            'Lend_date' => $_POST['Lend_date'],
+//            'Pay_date' => $_POST['Pay_date'],
+//            'updated_at' => date("Y-m-d h:i:sa"),
+//        ]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['check' => 2]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['name' => $_POST['name']]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['phone_number' => $_POST['phone_number']]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['book_name' => $_POST['book_name']]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['Lend_date' => $_POST['Lend_date']]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['Pay_date' => $_POST['Pay_date']]);
+         $que = DB::table('customer')
+                ->where('id', $_POST['id'])->update(['updated_at' =>  date("Y-m-d h:i:sa")]);
+        
+        $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
+        if ($que) {
+            $msg = "Đã cập nhật dữ liệu thành công ";
+        } else {
+            DB::connection()->enableQueryLog();
+            $queries = DB::getQueryLog();
+            $msg = $queries;
         }
-//        $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
-//        if ($que) {
-//            $msg = "Đã cập nhật dữ liệu thành công ";
-//        } else {
-//            DB::connection()->enableQueryLog();
-//            $queries = DB::getQueryLog();
-//            $msg = $queries;
-//        }
         return response()->json(array('msg' => $msg), 200);
     }
 
