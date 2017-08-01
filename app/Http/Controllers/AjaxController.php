@@ -113,15 +113,6 @@ class AjaxController extends Controller {
     }
 
     public function updateC() {
-//        $msg = '';
-//        $msg = $msg . $_POST['id'] . '<br>';
-//        $msg = $msg . $_POST['name'] . '<br>';
-//        $msg = $msg . $_POST['phone_number'] . '<br>';
-//        $msg = $msg . $_POST['book_name'] . '<br>';
-//        $msg = $msg . $_POST['Lend_date'] . '<br>';
-//        $msg = $msg . $_POST['Pay_date'] . '<br>';
-//        $msg = $msg . 'Tóm lại là lỗi cái vẹo gì?'. '<br>';
-        //       return response()->json(array('msg' => $msg), 200);
         $msg = 'no error';
         $customer = DB::table('customer')->where('id', $_POST['id'])->first();
         $query = DB::table('book')->where('name', $customer->book_name)->update(['check' => 0]);
@@ -136,26 +127,26 @@ class AjaxController extends Controller {
 //            'Pay_date' => $_POST['Pay_date'],
 //            'updated_at' => date("Y-m-d h:i:sa"),
 //        ]);
-         $que = DB::table('customer')
-                ->where('id', $_POST['id'])->update(['check' => 2]);
-         $que = DB::table('customer')
-                ->where('id', $_POST['id'])->update(['name' => $_POST['name']]);
-         $que = DB::table('customer')
-                ->where('id', $_POST['id'])->update(['phone_number' => $_POST['phone_number']]);
-         $que = DB::table('customer')
-                ->where('id', $_POST['id'])->update(['book_name' => $_POST['book_name']]);
-         $que = DB::table('customer')
-                ->where('id', $_POST['id'])->update(['Lend_date' => $_POST['Lend_date']]);
-         $que = DB::table('customer')
-                ->where('id', $_POST['id'])->update(['Pay_date' => $_POST['Pay_date']]);
-         $que = DB::table('customer')
-                ->where('id', $_POST['id'])->update(['updated_at' =>  date("Y-m-d h:i:sa")]);
-        
+        $que = DB::table('customer')
+                        ->where('id', $_POST['id'])->update(['check' => 2]);
+        $que = DB::table('customer')
+                        ->where('id', $_POST['id'])->update(['name' => $_POST['name']]);
+        $que = DB::table('customer')
+                        ->where('id', $_POST['id'])->update(['phone_number' => $_POST['phone_number']]);
+        $que = DB::table('customer')
+                        ->where('id', $_POST['id'])->update(['book_name' => $_POST['book_name']]);
+        $que = DB::table('customer')
+                        ->where('id', $_POST['id'])->update(['Lend_date' => $_POST['Lend_date']]);
+        $que = DB::table('customer')
+                        ->where('id', $_POST['id'])->update(['Pay_date' => $_POST['Pay_date']]);
+        $que = DB::table('customer')
+                        ->where('id', $_POST['id'])->update(['updated_at' => '2017-07-18 00:22:13' ]);
+
         $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
         if ($que) {
             $msg = "Đã cập nhật dữ liệu thành công ";
         } else {
-             $msg = "Đã có lỗi trong quá trình cập nhật ";
+            $msg = "Đã có lỗi trong quá trình cập nhật ";
         }
         return response()->json(array('msg' => $msg), 200);
     }
@@ -326,7 +317,7 @@ class AjaxController extends Controller {
                 'Pay_date' => $_POST['Pay_date'],
 //                'created_at' => date("Y-m-d h:i:sa"),
 //                'updated_at' => date("Y-m-d h:i:sa"),
-                ]
+            ]
         ]);
         $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
         $msg = "Đã thêm bản ghi thành công";

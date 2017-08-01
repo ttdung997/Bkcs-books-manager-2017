@@ -65,3 +65,16 @@ PHP message: PHP Fatal error:  Exception thrown without a stack frame in Unknown
 2017/07/27 19:01:57 [error] 1065#1065: *77 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare App\Http\Controllers\MyFirstController::Login() in /var/www/html/blog/app/Http/Controllers/MyFirstController.php on line 130" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev"
 2017/07/27 19:01:58 [error] 1065#1065: *77 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare App\Http\Controllers\MyFirstController::Login() in /var/www/html/blog/app/Http/Controllers/MyFirstController.php on line 130" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev"
 2017/08/01 07:57:05 [error] 1056#1056: *1 directory index of "/var/www/html/blog/public/uploads/" is forbidden, client: 127.0.0.1, server: lara.dev, request: "GET /uploads/ HTTP/1.1", host: "lara.dev"
+2017/08/01 10:16:19 [error] 1056#1056: *526 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to a member function send() on null in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:112
+Stack trace:
+#0 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(89): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#2 {main}
+  thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112
+PHP message: PHP Fatal error:  Uncaught Error: Call to a member function send() on null in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:112
+Stack trace:
+#0 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(89): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#1 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#2 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#3 {main}
+  thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "GET /updateinfoC/1?_token%20=%20KEWTja4GoggC4Q9OjkJRLfzOQcnxTXkvAf0TqX8T HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev", referrer: "http://lara.dev/khachview/1"
