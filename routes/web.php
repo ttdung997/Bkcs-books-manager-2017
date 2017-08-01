@@ -63,6 +63,8 @@ Route::get('/userInfo','MyFirstController@userInfo');
 
 Route::get('pageNumberB', 
   ['as' => 'pageNumberB', 'uses' => 'FormController@pageNumberB']);
+Route::get('pageNumberC', 
+  ['as' => 'pageNumberC', 'uses' => 'FormController@pageNumberC']);
 Route::post('BookuploadForm', 
   ['as' => 'BookuploadForm', 'uses' => 'UploadController@BookuploadForm']);
 Route::post('upload', 'UploadController@upload');
