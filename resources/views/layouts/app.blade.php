@@ -100,7 +100,7 @@
                     <div class="row">
                         <!-- #bottom-logo end -->
                         <div class="clear"></div>
-                        <p class="copyright">© Trung tâm an toàn máy tinh, ĐHBK Hà Nội.&nbsp; 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
+                        <p class="copyright"     style="text-align: left;">© Trung tâm an toàn máy tinh, ĐHBK Hà Nội.&nbsp; 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
                     </div><!-- row -->
                 </div><!-- container -->
             </div>
