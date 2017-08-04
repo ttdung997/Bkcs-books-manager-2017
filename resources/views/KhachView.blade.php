@@ -7,8 +7,8 @@
 
     </div>
 
-    <button type="button" onclick="insertCustomer()" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myModal">Thêm bản ghi</button>
-    <a  type="button" class="btn btn-primary" onclick="seleteDate()" data-pjax="0" data-toggle="modal" data-target="#myModal">Xuất dữ liệu </a>
+    <button type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myInsertModal">Thêm bản ghi</button>
+    <a  type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myExcelModal">Xuất dữ liệu </a>
 
 
     <br>
@@ -24,43 +24,35 @@
                     <a href="#" data-sort="id">Tên khách hàng</a>
                 </th>
                 <th>
-                    <a href="#" data-sort="id">Mượn sách</a>
+                    <a href="#" data-sort="id">Số điện thoại</a>
                 </th>
                 <th>
-                    <a href="#" data-sort="id">Trạng thái</a>
+                    <a href="#" data-sort="id">Chứng minh thư</a>
+                </th>
+                <th>
+                    <a href="#" data-sort="id">Số sách đang mượn</a>
                 </th>
 
+                <th class="action-column">Lich sử</th>
                 <th class="action-column">&nbsp;</th>
-            </tr>
-            <tr id="w0-filters" class="filters">
-                <td>&nbsp;</td>
-                <td>
-                    <input type="text" class="form-control" name="SinhVienSearch[id]">
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="SinhVienSearch[ten]">
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="SinhVienSearch[tieu_de]">
-                </td>
-                <td>&nbsp;</td>
             </tr>
         </thead>
         <tbody>
+
             <?php $i = 1 ?>
             <?php foreach ($user as $user) { ?>
                 <tr data-key="<?= $i ?>" id="ele<?= $user->id ?>">
                     <td><?= $i ?></td>
                     <td><?= $user->name ?></td>
-                    <td><?= $user->book_name ?></td>
-                    <?php if ($user->check == 0) echo "<td>Đã trả</td>";
-                          else echo "<td>Đang mượn</td>";
-                    ?>
+                    <td><?= $user->phone_number ?></td>
+                    <td><?= $user->cmt ?></td>
+                    <td><?= $user->BookNumber ?></td>
+                    <td><a class="btn btn-primary" href="/HistoryCustomer/<?= $user->id ?>/1">Chi tiết</a></td>
                     <td onmouseenter="an()">
-                        <a onclick="getInfo(<?= $user->id ?>)" href="#" title="view" aria-label="view" data-pjax="0" data-toggle="modal" data-target="#myModal">
+                        <a onclick="getInfo(<?= $user->id ?>)" href="#" title="view" aria-label="view" data-pjax="0" data-toggle="modal" data-target="#myViewModal">
                             <span style="color: #337ab7" class="glyphicon glyphicon-eye-open">
                             </span>
-                            <a onclick="updateInfo(<?= $user->id ?>)" href="#" title="update" aria-label="update" data-pjax="0" data-toggle="modal" data-target="#myModal">
+                            <a onclick="updateInfo(<?= $user->id ?>)" href="#" title="update" aria-label="update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
                                 <span style="color: #337ab7" class="glyphicon glyphicon-pencil">
                                 </span>
                             </a> <a title="Delete" onclick="deleteC(<?= $user->id ?>)" data-method="post" data-pjax="0">
@@ -77,17 +69,114 @@
             </tr>
         </tbody>
     </table>
-    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="myViewModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Khung thông tin</h4>
+                    <h4 class="modal-title">Xem thông tin người dùng</h4>
 
                 </div>
                 <div class="modal-body">
-                    <div id="info">
-                    </div>
+                    <div class="form-group form-model">
+                        <label for="Tên khách hàng">Tên Khách Hàng</label>
+                        <p id="infoShow"><span id="customerName"></span></p></div>
+                    <div class="form-group form-model">
+                        <label for="số điện thoại">Số điện Thoại</label>
+                        <p id="infoShow"><span id="customerPhone"></span></p></div>
+                    <div class="form-group form-model">
+                        <label for="chọn sách">Chứng minh thư</label>
+                        <p id="infoShow"><span id="customerCmt"></span></p></div>
+                    <div class="form-group form-model">
+                        <label for="chọn sách">Số sách đang mượn</label>
+                        <p id="infoShow"><span id="customerBN"></span></p></div>
+                    <div class="form-group form-model">
+                        <label for="ngày mượn">Ngày Tạo</label>
+                        <p id="infoShow"><span id="customerCreate"></span></p></div>
+                    <div class="form-group form-model">
+                        <label for="ngày trả">Ngày Cập Nhật</label>
+                        <p id="infoShow"><span id="customerUpdate"></span></p></div>
+                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="myUpdateModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Thêm thông tin người dùng</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form id="khachform" accept-charset="UTF-8" class="form" >
+                        <input name="_token" type="hidden" value="<?= csrf_token() ?>"">
+                        <input name="_token" type="hidden" value="<?= csrf_token() ?>">
+                        <div class="form-group form-model2">
+                            <label for="Tên khách hàng">Tên Khách Hàng</label>
+                            <input required="" class="form-control" placeholder="nhập tên..." name="name" type="text" >
+                        </div>
+
+                        <div class="form-group form-model2">
+                            <input name="id" type="hidden">
+                            <label for="số điện thoại">Số điện Thoại</label>
+                            <input required="" class="form-control" placeholder="nhập số điện thoại" name="phone_number" type="text" >
+                        </div>
+                        <div class="form-group form-model2">
+                            <label for="số điện thoại">Chứng minh thư</label>
+                            <input required="" class="form-control" placeholder="nhập chứng minh" name="cmt" type="text" value>
+                        </div>
+
+                        <div class="form-group form-model2">
+                            <button class="btn btn-primary cratebutton" onclick="updateC()" data-dismiss="modal">chỉnh sửa</button>
+                        </div>
+                    </form>
+                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="myExcelModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Xuất dữ liệu theo tháng</h4>
+
+                </div>
+                <div class="modal-body">
+                    <br>
+                    <form action="/CustomerExport" method="post" accept-charset = "UTF-8" class = "form" >
+                        <input name = "_token" type = "hidden" value = "<?= csrf_token() ?>">
+                        <div class="form-group form-model2">
+                            <label for="chọn sách">Chọn tháng</label>
+                            <select required="" class="form-control" name="month">
+                                <?php
+                                for ($i = 1; $i < 13; $i++) {
+                                    ?>
+                                <option value="<?=$i?>">Tháng <?=$i?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group form-model2">
+                            <label for="chọn sách">Chọn Năm</label>
+                            <select required="" class="form-control" name="year">
+                                <option value="2016"> Năm 2016 </option>
+                                <option value="2017"> Năm 2017</option></select>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary cratebutton" >Xuất dự liệu</button>
+                    </form>
                     <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
                 </div>
                 <div class="modal-footer">
@@ -97,61 +186,100 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <div class="pagenavi">
+    <div class="modal fade" tabindex="-1" role="dialog" id="myInsertModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Thêm người dùng mới</h4>
 
-        <b class="pages">Trang <?= $page ?> / <?= intval(($count - 1) / 5) + 1 ?></b>
-        <?php if ($page != 1) { ?><a class="paginate_button previous disabled" href="/khachview/<?= $page - 1 ?>">« Trước</a><?php } ?>
-        <?php
-        for ($i = $page - 1; $i <= $page - 1; $i++) {
-            if ($i <= 0)
-                continue;
-            ?>
-            <a class="paginate_button" href="/khachview/<?= $i ?>"><?= $i ?></a>
-        <?php } ?>
-        <b class="paginate_button current"><?= $page ?></b>
-        <?php
-        for ($i = $page + 1; $i < $page + 2; $i++) {
-            if ($i > intval(($count - 1) / 5) + 1)
-                break;
-            ?>
-            <a class="paginate_button" href="/khachview/<?= $i ?>"><?= $i ?></a>
-        <?php } ?>
-        <?php if ($page != intval(($count - 1) / 5) + 1) { ?><a class="paginate_button previous disabled" href="/khachview/<?= $page + 1 ?>" >Sau »</a><?php } ?>
+                </div>
+                <div class="modal-body">
+                    <form id="khachforminsert" accept-charset="UTF-8" class="form" >
+                        <input name="_token" type="hidden" value="<?= csrf_token() ?>">
+                        <input name="_token" type="hidden" value="<?= csrf_token() ?>">
+                        <div class="form-group form-model2">
+                            <label for="Tên khách hàng">Tên Khách Hàng</label>
+                            <input required="" class="form-control" placeholder="nhập tên..." name="name" type="text" >
+                        </div>
+
+                        <div class="form-group form-model2">
+                            <label for="số điện thoại">Số điện Thoại</label>
+                            <input required="" class="form-control" placeholder="nhập số điện thoại" name="phone_number" type="text" >
+                        </div>
+                        <div class="form-group form-model2">
+                            <label for="số điện thoại">Chứng minh thư</label>
+                            <input required="" class="form-control" placeholder="nhập chứng minh thư" name="cmt" type="text" >
+                        </div>
+
+                        <div class="form-group form-model2">
+                            <button class="btn btn-primary cratebutton" onclick="insertC()" data-dismiss="modal">Thêm Người dùng</button>
+                        </div>
+                    </form>
+                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="pagenavi">
         <form action="/pageNumberC" method="get">
 
             <label>Trang: </label>
             <input style="width: 20px;s" class="inputnumber" name="number" type="text">
             <input type="submit" hidden>
+            <b class="pages">Trang <?= $page ?> / <?= intval(($count - 1) / 5) + 1 ?></b>
+            <?php if ($page != 1) { ?><a class="paginate_button previous disabled" href="/khachview/<?= $page - 1 ?>">« Trước</a><?php } ?>
+            <?php
+            for ($i = $page - 1; $i <= $page - 1; $i++) {
+                if ($i <= 0)
+                    continue;
+                ?>
+                <a class="paginate_button" href="/khachview/<?= $i ?>"><?= $i ?></a>
+            <?php } ?>
+            <b class="paginate_button current"><?= $page ?></b>
+            <?php
+            for ($i = $page + 1; $i < $page + 2; $i++) {
+                if ($i > intval(($count - 1) / 5) + 1)
+                    break;
+                ?>
+                <a class="paginate_button" href="/khachview/<?= $i ?>"><?= $i ?></a>
+            <?php } ?>
+            <?php if ($page != intval(($count - 1) / 5) + 1) { ?><a class="paginate_button previous disabled" href="/khachview/<?= $page + 1 ?>" >Sau »</a><?php } ?>
+
         </form>
 
     </div>
 </div>
 <script>
-    function insertCustomer() {
-        $.ajax({
-            type: 'GET',
-            url: '/insertCustomer',
-            data: '_token = <?php echo csrf_token() ?>',
-            success: function (data) {
-                $("#info").html(data.info);
-            }
-        });
-    }
+    //    function insertCustomer() {
+    //        $.ajax({
+    //            type: 'GET',
+    //            url: '/insertCustomer',
+    //            success: function (data) {
+    //                $("#info").html(data.info);
+    //            }
+    //        });
+    //    }
     function insertC() {
 
-        var frm = $('#khachform');
+        var frm = $('#khachforminsert');
+        alert(frm.serialize());
         $.ajax({
             type: 'POST',
             url: '/insertC',
             data: frm.serialize(),
             success: function (data) {
                 $("#msg").html(data.msg);
-                $("#insert_line").html(data.insert_line);
                 if (<?= $page ?> == <?= intval(($count - 1) / 5) + 1 ?>) {
                     document.getElementById('msg').classList.remove("hidden");
                     setTimeout(function () {
                         location.reload();
-                    }, 2000);
+                    }, 100);
                 }
             }
         });
@@ -162,7 +290,12 @@
             url: '/getinfoC/' + n,
             data: '_token = <?php echo csrf_token() ?>',
             success: function (data) {
-                $("#info").html(data.info);
+                $("#customerName").html(data.user.name);
+                $("#customerPhone").html(data.user.phone_number);
+                $("#customerCmt").html(data.user.cmt);
+                $("#customerBN").html(data.user.BookNumber);
+                $("#customerCreate").html(data.user.created_at);
+                $("#customerUpdate").html(data.user.updated_at);
             }
         });
     }
@@ -172,7 +305,10 @@
             url: '/updateinfoC/' + n,
             data: '_token = <?php echo csrf_token() ?>',
             success: function (data) {
-                $("#info").html(data.info);
+                document.getElementsByName('name')[0].value = data.user.name;
+                document.getElementsByName('phone_number')[0].value = data.user.phone_number;
+                document.getElementsByName('cmt')[0].value = data.user.cmt;
+                document.getElementsByName('id')[0].value = data.user.id;
             }
         });
     }
@@ -180,12 +316,12 @@
         function updatechange(id) {
             var data = document.getElementById("ele" + id);
             var name = document.getElementsByName('name')[0].value.toString();
+            var cmt = document.getElementsByName('cmt')[0].value.toString();
             var phone_number = document.getElementsByName('phone_number')[0].value.toString();
-            var book_name = document.getElementsByName('book_name')[0].value.toString();
-           
+
+
             data.children[1].textContent = name;
-            data.children[2].textContent = book_name;
-             data.children[3].textContent ="Đang mượn";
+            data.children[3].textContent = cmt;
         }
         document.getElementById('loading').style.display = "block";
         document.getElementById('msg').classList.remove("hidden");
@@ -220,28 +356,28 @@
         document.getElementById('loading').style.display = "none";
         document.getElementById('msg').classList.add("hidden");
     }
-    function seleteDate() {
+//    function seleteDate() {
+//        $.ajax({
+//            type: 'GET',
+//            url: '/seleteDate/',
+//            data: '_token = <?php echo csrf_token() ?>',
+//            success: function (data) {
+//                $("#info").html(data.info);
+//            }
+//        });
+//    }
+    function BookGive(n) {
+        var data = document.getElementById("ele" + n);
+        data.children[3].textContent = "Đã trả";
+        document.getElementById('msg').classList.remove("hidden");
         $.ajax({
             type: 'GET',
-            url: '/seleteDate/',
-            data: '_token = <?php echo csrf_token() ?>',
-            success: function (data) {
-                $("#info").html(data.info);
-            }
-        });
-    }
-    function BookGive(n){
-     var data = document.getElementById("ele" + n);
-     data.children[3].textContent ="Đã trả";
-      document.getElementById('msg').classList.remove("hidden");
-          $.ajax({
-            type: 'GET',
-            url: '/BookGive/'+n,
+            url: '/BookGive/' + n,
             data: '_token = <?php echo csrf_token() ?>',
             success: function (data) {
                 $("#msg").html(data.msg);
                 document.getElementById('msg').classList.remove("hidden");
-                
+
             }
         });
     }

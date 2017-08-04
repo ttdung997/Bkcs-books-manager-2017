@@ -1,4 +1,4 @@
-
+@extends('layouts.check')
 @extends('layouts.app')
 @section('content')
 <div id="msg"  class="alert alert-danger">

@@ -47,6 +47,8 @@ class UploadController extends Controller {
                 [
                     'name' => $request->name,
                     'type' => $request->type,
+                    'tag'  => $request->tag,
+                    'tag'  => $request->des,
                     'Publication_date' => $request->publication,
 //                    'img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName(),
                     'img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName(),
@@ -84,9 +86,9 @@ class UploadController extends Controller {
                 ->update(
                 ['name' => $request->name,
                     'type' => $request->type,
+                    'tag'  => $request->tag,
                     'Publication_date' => $request->publication,
-                    'created_at' => date("Y-m-d h:i:s"),
-                    'updated_at' => date("Y-m-d h:i:s"),]
+                    'description' => $request->des,]
         );
         if ($que) {
             $msg = "Đã cập nhật dữ liệu thành công ";

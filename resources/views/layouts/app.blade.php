@@ -69,9 +69,10 @@
                             <li><a href="{{ route('login') }}">Đăng nhập </a></li>
                             <li><a href="{{ route('register') }}">Đăng kí</a></li>
                             @else
-                            <li class=""><a href="/form" class="ui-link">Quản lý sách(fr)</a></li>
                             <li class=""><a href="/Bookview/1" class="ui-link">Quản lý sách</a></li>
                             <li class=""><a href="/khachview/1" class="ui-link">Quản lý khách</a></li>
+                            <li class=""><a href="/DealView/1" class="ui-link">Quản lý giao dịch</a></li>
+                            <li class=""><a href="/TypeTagManager" class="ui-link">Quản lý loại sách và tag</a></li>
                             <li class=""><a href="/demo" class="ui-link">QrCode</a></li>
                             <li class="dropdown"><a class="ui-link">{{ Auth::user()->name }}</a>
                                 <ul class="dropdown-content">

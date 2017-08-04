@@ -12,10 +12,10 @@
 }
 
 #nutthongtin{
-   background-color: #efbb20;
-   border-radius: 100px;
-   border: 2px solid white;
-   font-size: 30px;
+    background-color: #efbb20;
+    border-radius: 100px;
+    border: 2px solid white;
+    font-size: 30px;
 }
 .khungten{
     text-align: center;
@@ -34,12 +34,12 @@
     text-align: center;
     padding-left: auto;
     padding-right: auto;
-        
+
 }
 .manu h2{
     color: #efbb20;
     font-size: 30px;
-    
+
 }
 .manu>a:hover{
     color: black;
@@ -47,7 +47,7 @@
 .bangchon{
     color:#cccccc;
     text-align: center;
-    
+
 }
 .bangchon a:hover{
     color: #efbb20;
@@ -55,14 +55,14 @@
 .product{
     border-bottom: 1px solid #cccccc;
     border-top: 1px solid #cccccc;;
-         
+
 }
 .content-new h4{
     color: #efbb20;
 }
 .content-new hr{
-     width: 20%;
-     margin-left: 0%;
+    width: 20%;
+    margin-left: 0%;
     height: 2px;
     border: none;
     background-color: #efbb20;
@@ -73,7 +73,7 @@
     color: white;
     width: 200px;
     border-radius: 100px
-    
+
 }
 .site-contact button:hover{
     color: white;
@@ -93,8 +93,8 @@
 }
 .info{
     display: none;
-        width: 89%;
-        position: absolute;
+    width: 89%;
+    position: absolute;
     top: 75%;
     height: 25%;
 }
@@ -111,7 +111,7 @@
 }
 .anhsanpham:hover{
     opacity: 0.3;
-      border: 3px solid blue;
+    border: 3px solid blue;
 }
 
 #bang{
@@ -121,10 +121,10 @@
 
 #khung{
     border: 1px solid black;
-     background-color: #ebf3f7;
-        margin-left: 6%;
-        margin-right: 6%;
-        margin-bottom: 4%;
+    background-color: #ebf3f7;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-bottom: 4%;
 }
 
 #khung h1{
@@ -169,12 +169,12 @@
     background-color: white;
 }
 .tab-pane{
-     text-indent: 30px;
-     padding-left: 20px;
-      color: black;
+    text-indent: 30px;
+    padding-left: 20px;
+    color: black;
     font-size: 14px;
     font-weight: 700;
-    
+
 }
 
 #thanhgioithieu>li>a{
@@ -185,13 +185,13 @@
     color: blue;
     font-size: 20px;
     font-weight: 700;
-    
+
 }
 
 #noidungbaiviet{
-     color: black;
-      font-size: 15px;
-      text-indent: 5%;
+    color: black;
+    font-size: 15px;
+    text-indent: 5%;
 }
 #khung ol li{
     color: black;
@@ -200,7 +200,7 @@
 }
 
 #noidungbaiviet a{
-     color: blue;
+    color: blue;
     font-weight: 700;
 }
 #noidungbaiviet a:hover{
@@ -225,7 +225,7 @@
     border-radius: 2px;
 }
 .paginate_button :hover{
-color: white !important;
+    color: white !important;
     border: 1px solid #111;
     background-color: #585858;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #585858), color-stop(100%, #111));
@@ -236,7 +236,7 @@ color: white !important;
     background: linear-gradient(to bottom, #585858 0%, #111 100%);
 }
 .pagenavi{
-    margin-left: 70%;
+    margin-left: 40%;
     display: block;
 }
 .dropdown-content {
@@ -264,6 +264,13 @@ color: white !important;
     height:279px;
     border: 1px solid black;
 }
+.bookImg2{
+    width:150px;
+    height:190px;
+    border: 1px solid black;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
 #footer {
     clear: both;
     width: 100%;
@@ -274,6 +281,9 @@ color: white !important;
 .content{
     min-height:490px;
 }
- .Qrform{
-        margin-left: 20%;
-    }
+.Qrform{
+    margin-left: 20%;
+}
+#seleteinput{
+    height: 38px;
+}

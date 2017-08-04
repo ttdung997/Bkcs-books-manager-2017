@@ -57,5 +57,12 @@ class FormController extends Controller {
         $number=$request->number;
          return redirect('khachview/'.$number);
     }
+    public function pageNumberD(Request $request) {
+        $number=$request->number;
+        $name=$request->name;
+        $id=$request->id;
+        if(intval($id) !== 0) return redirect($name.'/'.$id.'/'.$number);
+        else return redirect($name.$number);
+    }
 
 }

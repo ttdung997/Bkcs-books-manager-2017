@@ -88,16 +88,11 @@ class ExcelController extends Controller {
         if (strlen($customer) > 3) {
             $i = 1;
             foreach ($customer as $customer) {
-                if($customer->check==0)$msg='Đã trả';
-                if($customer->check==2)$msg='Đang mượn';
                 $data[] = array(
                     $i,
                     $customer->name,
                     $customer->phone_number,
-                    $customer->book_name,
-                    $msg,
-                    $customer->Lend_date,
-                    $customer->Pay_date,
+                    $customer->cmt,
                 );
                 $i++;
             }
@@ -108,7 +103,7 @@ class ExcelController extends Controller {
                 $excel->sheet('Sheet 1', function($cell) use ($data) {
                  $title = array('danh sách khách hàng mượn sách');
                    
-                    $headings = array('id', 'Tên khách hàng', 'số điện thoại', 'tên sách','Trạng thái', 'ngày mượn', 'ngày trả');
+                    $headings = array('id', 'Tên khách hàng', 'Số điện thoại', 'Chứng minh thư',);
                     // Font family
                     
                     $cell->setFontFamily('Calibri');

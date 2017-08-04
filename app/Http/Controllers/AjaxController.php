@@ -127,7 +127,7 @@ class AjaxController extends Controller {
             'Pay_date' => $_POST['Pay_date'],
             'updated_at' => date("Y-m-d h:i:s"),
         ]);
-        
+
         $query = DB::table('book')->where('name', $_POST['book_name'])->update(['check' => 2]);
         if ($que) {
             $msg = "Đã cập nhật dữ liệu thành công ";
@@ -251,8 +251,6 @@ class AjaxController extends Controller {
     public function insertCustomer() {
         $book = DB::table('book')->where('check', '0')->get();
         $info = "";
-
-
         $info = '<form id="khachform" accept-charset="UTF-8" class="form" >
 <input name="_token" type="hidden" value="' . csrf_token() . '"">
 <input name="_token" type="hidden" value="' . csrf_token() . '">
@@ -410,66 +408,78 @@ class AjaxController extends Controller {
             DB::table('customer')->where('id', $n)->update(['check' => 0]);
             $msg = "Đã trả sách thành công";
         } else
-            $msg = "Không thành công,sách đã được trả từ trước";
+            $msg = "Không thành công,sách đã được trả từ trước 1234";
         return response()->json(array('msg' => $msg), 200);
     }
 
     public function BookGive2($n) {
-
-
-        $book = DB::table('book')->where('id', $n)->first();
-        if ($book->check == 0) {
-            $msg = "Không thành công,sách đã được trả từ trước";
-        } else {
-            $query = DB::table('book')->where('id', $n)->update(['check' => 0]);
-            DB::table('customer')->where('book_name', $book->name)->update(['check' => 0]);
+        $deal = DB::table('book_deal')->where('book_id', $n)->orderBy('book_id', 'desc')->first();
+        if ($deal->status !== 0) {
+            $query = DB::table('book')->where('id', $deal->book_id)->update(['check' => 0]);
+            $query = DB::table('customer')->where('id', $deal->customer_id)->first();
+            $BN = $query->BookNumber - 1;
+            $query = DB::table('customer')->where('id', $deal->customer_id)->update(['BookNumber' => $BN]);
+            DB::table('book_deal')->where('id', $n)->update(['status' => 0]);
+            DB::table('book_deal')->where('id', $n)->update(['given_date' => date("Y-m-d")]);
             $msg = "Đã trả sách thành công";
-        }
-        return response()->json(array('msg' => $msg), 200);
+        } else
+            $msg = "giao dịch đã hoàn thành từ trước";
+        $msg = "<br>";
+        $msg = "Thông tin giao dịch: <br>";
+        $customer = DB::table('customer')->where('id', $deal->customer_id)->first();
+        $book = DB::table('book')->where('id', $deal->book_id)->first();
+        $msg = '<tr data-key="$i " id="ele'. $deal->id .'">
+            <td>'.$customer->name  .'<button onclick="getInfoC('. $customer->id .')" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Chi tiết</button></td>
+            <td>'.$book->name .'<button onclick="getInfoB('. $book->id .')" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Chi tiết</button></td>
+            <td>'. $deal->lend_date .'</td>
+            <td>'. $deal->give_date .'</td>
+            <td>Hoàn thành</td>';
+         
+    return response()->json(array('msg' => $msg), 200);
     }
 
     public function getBookForm($n) {
-        $book = DB::table('book')->where('id', $n)->first();
-        if ($book->check == 0) {
+    $book = DB::table('book')->where('id', $n)->first();
+    if ($book->check == 0) {
 
-            $msg = "";
+    $msg = "";
 
 
-            $msg = '<form id="khachform" accept-charset="UTF-8" class="form" >
-<input name="_token" type="hidden" value="' . csrf_token() . '"">
-<input name="_token" type="hidden" value="' . csrf_token() . '">
-<div class="form-group form-model2">
-    <label for="Tên khách hàng">Tên Khách Hàng</label>
-    <input required="" class="form-control" placeholder="nhập tên..." name="name" type="text" >
-</div>
+    $msg = '<form id="khachform" accept-charset="UTF-8" class="form" >
+    <input name="_token" type="hidden" value="' . csrf_token() . '"">
+    <input name="_token" type="hidden" value="' . csrf_token() . '">
+    <div class="form-group form-model2">
+        <label for="Tên khách hàng">Tên Khách Hàng</label>
+        <input required="" class="form-control" placeholder="nhập tên..." name="name" type="text" >
+    </div>
 
-<div class="form-group form-model2">
-    <label for="số điện thoại">Số điện Thoại</label>
-    <input required="" class="form-control" placeholder="nhập số điện thoại" name="phone_number" type="text" >
-</div>
-<div class="form-group form-model2">
-    <label for="chọn sách">Chọn Sách</label>
-    <select required="" class="form-control" name="book_name">
-    <option value="' . $book->name . '">' . $book->name . '</option>
+    <div class="form-group form-model2">
+        <label for="số điện thoại">Số điện Thoại</label>
+        <input required="" class="form-control" placeholder="nhập số điện thoại" name="phone_number" type="text" >
+    </div>
+    <div class="form-group form-model2">
+        <label for="chọn sách">Chọn Sách</label>
+        <select required="" class="form-control" name="book_name">
+            <option value="' . $book->name . '">' . $book->name . '</option>
         </select>
-</div>
-<div class="form-group form-model2">
-    <label for="ngày mượn">Ngày Mượn</label>
-    <input class="form-control" name="Lend_date" type="date" value="' . date("Y-m-d") . '" >
-    
-</div>
-<div class="form-group form-model2">
-    <label for="ngày trả">Ngày Trả</label>
-    <input class="form-control" name="Pay_date" type="date" value="' . date("Y-m-d") . '" >
-</div>
-<div class="form-group form-model2">
-    <button class="btn btn-primary cratebutton" onclick="insertC()" data-dismiss="modal">Thêm bản ghi</button>
-</div>
+    </div>
+    <div class="form-group form-model2">
+        <label for="ngày mượn">Ngày Mượn</label>
+        <input class="form-control" name="Lend_date" type="date" value="' . date("Y-m-d") . '" >
+
+    </div>
+    <div class="form-group form-model2">
+        <label for="ngày trả">Ngày Trả</label>
+        <input class="form-control" name="Pay_date" type="date" value="' . date("Y-m-d") . '" >
+    </div>
+    <div class="form-group form-model2">
+        <button class="btn btn-primary cratebutton" onclick="insertC()" data-dismiss="modal">Thêm bản ghi</button>
+    </div>
 </form>';
-        } else {
-            $msg = "Đã có người mượn sách";
-        }
-        return response()->json(array('msg' => $msg), 200);
-    }
+} else {
+$msg = "Đã có người mượn sách";
+}
+return response()->json(array('msg' => $msg), 200);
+}
 
 }
