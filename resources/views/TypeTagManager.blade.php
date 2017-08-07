@@ -13,7 +13,6 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Danh sách thể loại</h4>
-
                         </div>
                         <div class="modal-body">
                             <div id="info">

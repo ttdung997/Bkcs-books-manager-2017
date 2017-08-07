@@ -51,7 +51,7 @@
                 ?>
                 <tr data-key="<?= $i ?>" id="ele<?= $book->id ?>">
                     <td><?= $i ?></td>
-                    <td><img class="bookImg2" src="<?= $img ?>"></td>
+                    <td><img class="bookImg2" src="http://<?= $_SERVER['SERVER_NAME'].$img ?>"></td>
                     <td><?= $book->name ?></td>
                     <?php
                     if ($book->type) {

@@ -41,7 +41,7 @@ class UploadController extends Controller {
             $file = $request->file;
             $file->move(base_path() . $upload_folder, $file->getClientOriginalName());
             echo $file->getClientOriginalName();
-            echo '<img src="http://35.192.32.4/uploads/' . $file->getClientOriginalName() . '">';
+            echo '<img src="/uploads/' . $file->getClientOriginalName() . '">';
             $tag = $_POST['tag1'];
             // print_r($tag);
             $text = '';
@@ -56,7 +56,7 @@ class UploadController extends Controller {
                     'description' => $request->des,
                     'Publication_date' => $request->publication,
 //                    'img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName(),
-                    'img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName(),
+                    'img' => '/uploads/' . $file->getClientOriginalName(),
                     'check' => 0,
                     'created_at' => date("Y-m-d h:i:s"),
                     'updated_at' => date("Y-m-d h:i:s"),]
@@ -91,7 +91,7 @@ class UploadController extends Controller {
             $que = DB::table('book')
                     ->where('id', $request->id)
 //                    ->update(['img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName()]);
-                    ->update(['img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName()]);
+                    ->update(['img' => '/uploads/' . $file->getClientOriginalName()]);
         }
         $tag = $_POST['tag'];
         // print_r($tag);
