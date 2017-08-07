@@ -9,7 +9,7 @@
     </div>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <br>
-    <button type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myÍnsertModal">Thêm đầu sách</button>
+    <button type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myInsertModal">Thêm đầu sách</button>
     <a href="/BookExport" type="button" class="btn btn-primary">Xuất dữ liệu</a>
     <a onclick="updateInfoTest(80)" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">TEST</a>
 
@@ -129,6 +129,9 @@
                         <label for="số điện thoại">loại sách</label>
                         <p id="infoShow"><span id="bookType"></span></p></div>
                     <div class="form-group form-model">
+                        <label for="số điện thoại">Thể loại</label>
+                        <p id="infoShow"><span id="bookTag"></span></p></div>
+                    <div class="form-group form-model">
                         <label for="ảnh bìa sách">Ảnh bìa sách</label>
                         <img id="bookImg" class="bookImg">
 
@@ -175,14 +178,13 @@
                             <label for="Tên khách hàng">Tên Sách</label>
                             <input required="" class="form-control" placeholder="nhập tên..." name="name" type="text">
                         </div>
-
+                        <input name="id" type="hidden">
                         <div class="form-group form-model2">
-                            <input name="id" type="hidden">
                             <label for="chọn thể loại">Chọn thể loại</label>
-                            <select onmouseenter="changeTag(this.options[selectedIndex].value);" required="" class="form-control" name="type">
+                            <select onchange="changeTagUpdate(this.options[selectedIndex].value);" required="" class="form-control" name="type">
                                 <option id="typeDefault"></option>
                                 <?php
-                                $type = DB::table('book_type')->get();
+                                $type = DB::table('book_type')->where('status', '0')->get();
                                 foreach ($type as $type) {
                                     ?>
                                     <option value="<?= $type->id ?>" > <?= $type->name ?> </option>
@@ -193,10 +195,16 @@
                         </div>
                         <div class="form-group form-model2">
                             <label for="chọn thể loại">Chọn Tag</label>
-                            <select required="" class="form-control" name="tag" id="tag">
-                                <option id="tagDefault" ></option>
+                            <select multiple="multiple" size="6" class="form-control" name="tag[]" id="TagUpdateInfo" style="height: 200px;" >
+                                <?php
+                                $tag = DB::table('book_tag')->where('type_id', 2)->where('status', '0')->get();
+                                foreach ($tag as $tag) {
+                                    ?>
+                                    <option value="<?= $tag->id ?>" > <?= $tag->name ?> </option>
+                                    <?php
+                                }
+                                ?>
                             </select>
-
                         </div>
                         <div class="form-group form-model2">
                             <label for="ảnh bìa sách">Ảnh bìa sách hiện tại</label>
@@ -231,7 +239,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-     <div class="modal fade" tabindex="-1" role="dialog" id="myÍnsertModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="myInsertModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -250,10 +258,10 @@
 
                         <div class="form-group form-model2">
                             <label for="chọn thể loại">Chọn thể loại</label>
-                            <select onmouseenter="changeTag1(this.options[selectedIndex].value);" required="" class="form-control" name="type">
+                            <select onchange="changeTag(this.options[selectedIndex].value);" required="" class="form-control" name="type">
 
                                 <?php
-                                $type = DB::table('book_type')->get();
+                                $type = DB::table('book_type')->where('status', '0')->get();
                                 foreach ($type as $type) {
                                     ?>
                                     <option value="<?= $type->id ?>" > <?= $type->name ?> </option>
@@ -264,9 +272,16 @@
                         </div>
                         <div class="form-group form-model2">
                             <label for="chọn thể loại">Chọn Tag</label>
-                            <select required="" class="form-control" name="tag" id="tag1">
+                            <select multiple="multiple" size="6" class="form-control" name="tag1[]" id="TagInfo" style="height: 200px;" >
+                                <?php
+                                $tag = DB::table('book_tag')->where('type_id', 2)->where('status', '0')->get();
+                                foreach ($tag as $tag) {
+                                    ?>
+                                    <option value="<?= $tag->id ?>" > <?= $tag->name ?> </option>
+                                    <?php
+                                }
+                                ?>
                             </select>
-
                         </div>
                         <div class="form-group form-model2">
                             <label for="số điện thoại">Chọn ảnh</label>
@@ -280,11 +295,11 @@
                             <label for="chọn sách">Ngày xuất bản</label>
                             <input class="form-control" name="publication" type="date">
                         </div>
-                            <br><br>
-                            <div class="form-group form-model2">
-                                <button class = "btn btn-primary cratebutton" type = "submit  data-dismiss="modal">Thêm sách</button>
-                            </div>
-                            <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+                        <br><br>
+                        <div class="form-group form-model2">
+                            <button class = "btn btn-primary cratebutton" type = "submit  data-dismiss="modal">Thêm sách</button>
+                        </div>
+                        <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -326,6 +341,28 @@
 </div>
 
 <script>
+    function changeTag(n) {
+        $.ajax({
+            type: 'GET',
+            url: '/changeBookTag/' + n,
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+                $("#TagInfo").html(data.info);
+            }
+        });
+
+    }
+    function changeTagUpdate(n) {
+        $.ajax({
+            type: 'GET',
+            url: '/changeBookTag/' + n,
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+                $("#TagUpdateInfo").html(data.info);
+            }
+        });
+
+    }
     function getInfo(n) {
         $.ajax({
             type: 'GET',
@@ -337,7 +374,8 @@
                 $("#bookCreate").html(data.book.created_at);
                 $("#bookUpdate").html(data.book.updated_at);
                 $("#bookDes").html(data.book.description);
-                $("#bookType").html(data.typeBookName + ' / ' + data.tagname);
+                $("#bookType").html(data.typeBookName);
+                $("#bookTag").html(data.tagname);
                 document.getElementById("bookImg").src = data.img;
                 document.getElementById("downloadQr").download = data.book.name + "png";
                 document.getElementById("QrCodeImg").src = data.QrCodeImg;
@@ -354,13 +392,12 @@
                 document.getElementsByName('name')[0].value = data.book.name;
                 document.getElementsByName('des')[0].value = data.book.description;
                 document.getElementsByName('id')[0].value = data.book.id;
-                alert(data.year + "-" + data.month + "-" + data.day);
                 document.getElementsByName('publication')[0].value = (data.year + "-" + data.month + "-" + data.day);
                 document.getElementById("bookImgNow").src = data.img;
                 document.getElementById('typeDefault').value = data.typeBookid;
-                document.getElementById('tagDefault').value = data.tagid;
+                $("#TagUpdateInfo").html(data.tagname);
+                 $("#TagUpdateInfo").html(data.tagname);
                 $("#typeDefault").html(data.typeBookName);
-                $("#tagDefault").html(data.tagname);
 
 
             }
@@ -483,78 +520,7 @@ foreach ($type as $type) {
         var img = document.getElementById('QrCode');
         window.location.href = img.src.replace('image/png', 'image/octet-stream');
     }
-    function changeTag(n) {
-        if (parseInt(n) !== 2) {
-            var s = document.createElement('option');
-            var e = document.getElementById('tag');
-            while (e.length > 0)
-                e.remove(e.length - 1);
-            s.text = "Đang cập nhật";
-            s.value = "0";
-            try {
-                e.add(s, null);
-            } catch (ex) {
-                e.add(s);
-            }
-        } else {
-            var s = document.createElement('option');
-            var e = document.getElementById('tag');
-            while (e.length > 0)
-                e.remove(e.length - 1);
-<?php
-$tag = DB::table('book_tag')->where('type_id', 2)->get();
-foreach ($tag as $tag) {
-    ?>
-                var s = document.createElement('option');
-                var e = document.getElementById('tag');
-                s.text = "<?= $tag->name ?>";
-                s.value = "<?= $tag->id ?>";
-                try {
-                    e.add(s, null);
-                } catch (ex) {
-                    e.add(s);
-                }
-    <?php
-}
-?>
-        }
-    }
-    function changeTag1(n) {
-        if (parseInt(n) !== 2) {
-            var s = document.createElement('option');
-            var e = document.getElementById('tag1');
-            while (e.length > 0)
-                e.remove(e.length - 1);
-            s.text = "Đang cập nhật";
-            s.value = "0";
-            try {
-                e.add(s, null);
-            } catch (ex) {
-                e.add(s);
-            }
-        } else {
-            var s = document.createElement('option');
-            var e = document.getElementById('tag1');
-            while (e.length > 0)
-                e.remove(e.length - 1);
-<?php
-$tag = DB::table('book_tag')->where('type_id', 2)->get();
-foreach ($tag as $tag) {
-    ?>
-                var s = document.createElement('option');
-                var e = document.getElementById('tag1');
-                s.text = "<?= $tag->name ?>";
-                s.value = "<?= $tag->id ?>";
-                try {
-                    e.add(s, null);
-                } catch (ex) {
-                    e.add(s);
-                }
-    <?php
-}
-?>
-        }
-    }
+
 
     //    function getInfoTest(n) {
     //        $.ajax({

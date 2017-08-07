@@ -1,49 +1,15 @@
-<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-<script>
-//    navigator.getUserMedia = navigator.getUserMedia ||
-//            navigator.webkitGetUserMedia ||
-//            navigator.mozGetUserMedia;
-//    
-//    if (navigator.getUserMedia) {
-//        navigator.getUserMedia({audio: true, video: {width: 1280, height: 720}},
-//                function (stream) {
-//                    var video = document.querySelector('video');
-//                     if (window.webkitURL) {
-//        video.src = window.webkitURL.createObjectURL(stream);
-//    } else {
-//        video.src = stream;
-//    }
-//                    video.srcObject = stream;
-//                    video.onloadedmetadata = function (e) {
-//                        video.play();
-//                    };
-//                },
-//                function (err) {
-//                    console.log("The following error occurred: " + err.name);
-//                }
-//        );
-//    } else {
-//        console.log("getUserMedia not supported");
-//    }
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-var constraints = {audio: false, video: true};
-var video = document.querySelector("video");
-
-function successCallback(stream) {
-  window.stream = stream; // stream available to console
-  if (window.URL) {
-    video.src = window.URL.createObjectURL(stream);
-  } else {
-    video.src = stream;
-  }
-}
-
-function errorCallback(error){
-  console.log("navigator.getUserMedia error: ", error);
-}
-
-navigator.getUserMedia(constraints, successCallback, errorCallback);
-</script>
-<video id="video" width="160" height="120" autoplay></video><br>
-<div id="div"></div>
+<form method="post" action="/mselect">
+    <select multiple="multiple" size="6" class="form-control" name="loaixe[]" id="exampleSelect2" style="height: 200px;" >
+        <option value="1">Kia Morning 1.25 Si MT</option>
+        <option  value="2">Kia Morning 1.25 Si AT</option>
+        <option  value="3">Kia Sedona 3.3 GATH</option>
+        <option  value="4">Honda City 1.5AT</option>
+        <option  value="5">Honda Civic 1.5 Turbo</option>
+        <option  value="6">Honda CR-V 2.0AT</option>
+        <option  value="7">Ford EcoSport 1.5AT Titanium</option>
+        <option  value="8">Ford Everest Titanium 2.2AT 4x2</option>
+        <option  value="9">Ford Ranger XLS 2.2L - 4x2 AT</option>
+    </select>
+    <?php echo Form::token(); ?>
+    <button type="submit" class="btn btn-primary">Đăng kí</button>
+</form>

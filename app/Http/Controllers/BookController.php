@@ -62,6 +62,14 @@ class BookController extends Controller {
     }
 
     public function showBook($n) {
+
+        function multiexplode($delimiters, $string) {
+
+            $ready = str_replace($delimiters, $delimiters[0], $string);
+            $launch = explode($delimiters[0], $ready);
+            return $launch;
+        }
+
         $book = DB::table('book')->where('id', $n)->first();
         if ($book->type == 0)
             $typeBookName = "Đang cập nhật";
@@ -69,11 +77,19 @@ class BookController extends Controller {
             $typeBook = DB::table('book_type')->where('id', $book->type)->first();
             $typeBookName = $typeBook->name;
         }
-        if ($book->tag == 0)
-            $tagname = "";
+        $tagname = "";
+        if (strlen($book->tag) < 2)
+            $tagname = "Đang cập nhật";
         else {
-            $tag = DB::table('book_tag')->where('id', $book->tag)->first();
-            $tagname = $tag->name;
+            $tagname = "";
+            $tag2 = multiexplode(array(","), $book->tag);
+            for ($i = 0; $i < count($tag2) - 1; $i++) {
+                $tag = DB::table('book_tag')->where('id', intval($tag2[$i]))->first();
+                if ($tag)
+                    $tagname = $tagname . $tag->name . ",";
+                else
+                    $tagname = "Đang cập nhật";
+            }
         }
 
         $info = "";
@@ -90,7 +106,16 @@ class BookController extends Controller {
     }
 
     public function updateBook($n) {
+
+        function multiexplode($delimiters, $string) {
+
+            $ready = str_replace($delimiters, $delimiters[0], $string);
+            $launch = explode($delimiters[0], $ready);
+            return $launch;
+        }
+
         $book = DB::table('book')->where('id', $n)->first();
+        $tag2 = multiexplode(array(","), $book->tag);
         if ($book->type == 0) {
             $typeBookName = "Chọn loại sách";
             $typeBookid = 0;
@@ -99,14 +124,15 @@ class BookController extends Controller {
             $typeBookName = $typeBook->name;
             $typeBookid = $typeBook->id;
         }
-        if ($book->tag == 0) {
-            $tagname = "Chọn tag";
-            $tagid = 0;
-        } else {
-            $tag = DB::table('book_tag')->where('id', $book->tag)->first();
-            $tagname = $tag->name;
-            $tagid = $tag->id;
-        }
+        $tagname = "";
+        $tag = DB::table('book_tag')->where('type_id', $typeBookid)->where('status', '0')->get();
+        if (strlen($tag) > 3) {
+            foreach ($tag as $tag) {
+                if(in_array($tag->id, $tag2)) $tagname = $tagname . ' <option selected value="' . $tag->id . '" >' . $tag->name . '</option>';
+                else $tagname = $tagname . ' <option value="' . $tag->id . '" >' . $tag->name . '</option>';
+            }
+        } else
+            $tagname = ' <option value="0" >Đang cập nhật</option>';
 
         $info = "";
         if ($book->img == NULL) {
@@ -117,7 +143,6 @@ class BookController extends Controller {
         return response()->json(array('typeBookName' => $typeBookName,
                     'typeBookid' => $typeBookid,
                     'tagname' => $tagname,
-                    'tagid' => $tagid,
                     'year' => $year,
                     'month' => $month,
                     'day' => $day,
@@ -126,7 +151,6 @@ class BookController extends Controller {
                     'book' => $book), 200);
     }
 
-   
     public function updateB() {
 
 
@@ -320,7 +344,8 @@ class BookController extends Controller {
         return response()->json(array('msg' => $msg
                         ), 200);
     }
- public function updateBookTest($n) {
+
+    public function updateBookTest($n) {
         $type = DB::table('book_type')->get();
         $book = DB::table('book')->where('id', $n)->get();
 
@@ -382,6 +407,18 @@ class BookController extends Controller {
 <div class="form-group form-model2">
     <button class="btn btn-primary cratebutton" onclick="updateB2()" data-dismiss="modal">chỉnh sửa</button>
 </div>';
+        return response()->json(array('info' => $info), 200);
+    }
+
+    function changeTag($n) {
+        $info = "";
+        $tag = DB::table('book_tag')->where('type_id', $n)->where('status', '0')->get();
+        if (strlen($tag) > 3) {
+            foreach ($tag as $tag) {
+                $info = $info . ' <option value="' . $tag->id . '" >' . $tag->name . '</option>';
+            }
+        } else
+            $info = ' <option value="0" >Đang cập nhật</option>';
         return response()->json(array('info' => $info), 200);
     }
 

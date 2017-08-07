@@ -36,19 +36,24 @@ class UploadController extends Controller {
     }
 
     public function BookuploadForm(Request $request) {
-        echo "1234";
         $upload_folder = '/public/uploads/';
         if ($request->file) {
-            $file =$request->file;
+            $file = $request->file;
             $file->move(base_path() . $upload_folder, $file->getClientOriginalName());
             echo $file->getClientOriginalName();
-            echo '<img src="http://35.192.32.4/uploads/'.$file->getClientOriginalName().'">';
+            echo '<img src="http://35.192.32.4/uploads/' . $file->getClientOriginalName() . '">';
+            $tag = $_POST['tag1'];
+            // print_r($tag);
+            $text = '';
+            for ($i = 0; $i < count($tag); $i++) {
+                $text = $text . $tag[$i] . ",";
+            }
             $query = DB::table('book')->insert([
                 [
                     'name' => $request->name,
                     'type' => $request->type,
-                    'tag'  => $request->tag,
-                    'tag'  => $request->des,
+                    'tag' => $text,
+                    'description' => $request->des,
                     'Publication_date' => $request->publication,
 //                    'img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName(),
                     'img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName(),
@@ -58,6 +63,13 @@ class UploadController extends Controller {
             ]);
         }
         return redirect('Bookview/1');
+    }
+
+    public function multiexplode($delimiters, $string) {
+
+        $ready = str_replace($delimiters, $delimiters[0], $string);
+        $launch = explode($delimiters[0], $ready);
+        return $launch;
     }
 
     public function index() {
@@ -79,14 +91,20 @@ class UploadController extends Controller {
             $que = DB::table('book')
                     ->where('id', $request->id)
 //                    ->update(['img' => 'http://lara.dev/uploads/' . $file->getClientOriginalName()]);
-                   ->update(['img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName()]);
+                    ->update(['img' => 'http://35.192.32.4/uploads/' . $file->getClientOriginalName()]);
+        }
+        $tag = $_POST['tag'];
+        // print_r($tag);
+        $text = '';
+        for ($i = 0; $i < count($tag); $i++) {
+            $text = $text . $tag[$i] . ",";
         }
         $que = DB::table('book')
                 ->where('id', $request->id)
                 ->update(
                 ['name' => $request->name,
                     'type' => $request->type,
-                    'tag'  => $request->tag,
+                    'tag' => $text,
                     'Publication_date' => $request->publication,
                     'description' => $request->des,]
         );

@@ -46,6 +46,9 @@ Route::group(['prefix' => 'customer'], function(){
 	Route::get('update/{stn}', 'MyFirstController@updateCustomer');
         Route::get('delete/{stn}', 'MyFirstController@deleteCustomer');
 });
+
+Route::post('mselect', 
+  ['as' => 'mselect', 'uses' => 'MyFirstController@mselect']);
 Route::get('bookForm', 
   ['as' => 'bookForm', 'uses' => 'FormController@create']);
 Route::post('bookForm', 
@@ -85,6 +88,8 @@ Route::post('CustomerExport',
 
 //Book
     Route::get('/BookGive/{n}','BookController@BookGive');
+    
+Route::get('/changeBookTag/{n}','BookController@changeTag');
 Route::get('/BookGive2/{n}','BookController@BookGive2');
 Route::get('/getBookForm/{n}','BookController@getBookForm');
 
