@@ -82,6 +82,7 @@ Route::get('/output','MyFirstController@output');
 
 Route::get('/BookExport','ExcelController@BookExport');
 Route::get('/ExcelView','ExcelController@ExcelView');
+Route::get('/DealExport','ExcelController@DealExport');
 Route::get('/seleteDate','ExcelController@seleteDate');
 Route::post('CustomerExport', 
   ['as' => 'CustomerExport', 'uses' => 'ExcelController@CustomerExport']);

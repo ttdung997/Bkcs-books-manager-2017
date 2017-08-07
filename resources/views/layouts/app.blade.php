@@ -25,6 +25,7 @@
         <link rel="shortcut icon" href="{{URL::asset('images/logo.png')}}" />
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.css') }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
 
         <!-- CSRF Token -->
@@ -79,7 +80,7 @@
                                     <li><a href="/userInfo">Thông tin cá nhân</a></li>
                                     <li> <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
+    document.getElementById('logout-form').submit();">
                                             Đăng xuất
                                         </a></li>
                                 </ul>
@@ -94,6 +95,8 @@
                 </div>
             </nav>
             <div class="content">
+
+                <div class="loader"></div>
                 @yield('content')
             </div><br><br><br>
             <div id="footer">

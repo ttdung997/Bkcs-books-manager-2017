@@ -22,15 +22,15 @@
                                     $type = DB::table('book_type')->where('status', '0')->get();
                                     foreach ($type as $type) {
                                         ?>
-                                        <li class="list-group-item" id="type<?= $type->id ?>" ><?= $type->name ?>
+                                        <li class="list-group-item" id="type<?= $type->id ?>" > <a onclick="changeTag(<?= $type->id ?>)" href="#" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myShowModal"><?= $type->name ?></a>  
                                             <span style="float: right">
-                                                <a onclick="changeTag(<?= $type->id ?>)" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myShowModal">
+                                                <a onclick="changeTag(<?= $type->id ?>)" href="#" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myShowModal">
                                                     <span style="color: #337ab7" class="glyphicon glyphicon-eye-open">
                                                     </span>
-                                                </a>  <a onclick="updateType(<?= $type->id ?>, '<?= $type->name ?>')" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
+                                                </a>  <a  href="#" onclick="updateType(<?= $type->id ?>, '<?= $type->name ?>')" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
                                                     <span style="color: #337ab7" class="glyphicon glyphicon-pencil">
                                                     </span>
-                                                </a> <a onclick="deleteType(<?= $type->id ?>)" data-method="post" data-pjax="0">
+                                                </a> <a onclick="deleteType(<?= $type->id ?>)" href="#" data-method="post" data-pjax="0">
                                                     <span style="color: #337ab7" class="glyphicon glyphicon-trash">
                                                     </span>
                                                 </a>
@@ -58,7 +58,7 @@
                             </form>
                         </div>
                         <div class="modal-footer form-hidden" id="typeUpdateForm">
-                            <form id="booktypeform" class="form-inline " method="post" action="/updateType">
+                            <form id="edittypeform" class="form-inline " method="post" action="/updateType">
                                 <label for="chọn sách">sửa thể loại</label>
                                 <input name = "_token" type = "hidden" value = "<?= csrf_token() ?>">
                                 <input name="_token" type="hidden" value="<?= csrf_token() ?>">
@@ -92,10 +92,10 @@
                                             <li class="list-group-item" id="tag<?= $tag->id ?>"><?= $tag->name ?>
                                                 <span style="float: right">
 
-                                                </a>  <a onclick="updateTag(<?= $tag->id ?>, '<?= $tag->name ?>')" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
-                                                <span style="color: #337ab7" class="glyphicon glyphicon-pencil">
+                                                </a>  <a onclick="updateTag(<?= $tag->id ?>, '<?= $tag->name ?>')" href="#"  title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
+                                                <span  style="color: #337ab7" class="glyphicon glyphicon-pencil">
                                                 </span>
-                                            </a> <a onclick="updateTag(<?= $tag->id ?>)" data-method="post" data-pjax="0">
+                                            </a> <a onclick="updateTag(<?= $tag->id ?>)" href="#" data-method="post" data-pjax="0">
                                                 <span style="color: #337ab7" class="glyphicon glyphicon-trash">
                                                 </span>
                                             </a>
@@ -116,7 +116,7 @@
                     <button type="button" class="btn btn-primary" onclick ="opentagForm()">Thêm tag</button>
                 </div>
                 <div class="modal-footer form-hidden" id="tagForm">
-                    <form id="booktypeform" class="form-inline " method="post" action="/insertTag">
+                    <form id="booktagform" class="form-inline " method="post" action="/insertTag">
                         <label for="chọn sách">Thêm tag</label>
                         <input name = "_token" type = "hidden" value = "<?= csrf_token() ?>">
                         <input name="_token" type="hidden" value="<?= csrf_token() ?>">
@@ -126,7 +126,7 @@
                     </form>
                 </div>
                 <div class="modal-footer form-hidden" id="tagUpdateForm">
-                    <form id="booktypeform" class="form-inline " method="post" action="/updateTag">
+                    <form id="edittagform" class="form-inline " method="post" action="/updateTag">
                         <label for="chọn sách">sửa tag</label>
                         <input name = "_token" type = "hidden" value = "<?= csrf_token() ?>">
                         <input name="_token" type="hidden" value="<?= csrf_token() ?>">
@@ -157,6 +157,7 @@
         document.getElementById('typeUpdateForm').classList.remove("form-hidden");
         document.getElementsByName('updateName')[0].value = name.toString();
         document.getElementsByName('updateId')[0].value = n;
+        window.location.hash = '#edittypeform';
     }
     function deleteType(n) {
         if (confirm("Bạn có chắc muốn xóa thể loại này") == true) {
@@ -177,6 +178,7 @@
         document.getElementById('tagUpdateForm').classList.remove("form-hidden");
         document.getElementsByName('updateTag')[0].value = name.toString();
         document.getElementsByName('updateTagId')[0].value = n;
+        window.location.hash = '#edittagform';
     }
     function deleteTag(n) {
         if (confirm("Bạn có chắc muốn xóa thể loại này") == true) {
@@ -203,5 +205,6 @@
     function opentagForm() {
         document.getElementById('tagForm').classList.remove("form-hidden");
     }
+    
 </script>
 @stop

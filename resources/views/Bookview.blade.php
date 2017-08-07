@@ -11,7 +11,7 @@
     <br>
     <button type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myInsertModal">Thêm đầu sách</button>
     <a href="/BookExport" type="button" class="btn btn-primary">Xuất dữ liệu</a>
-    <a onclick="updateInfoTest(80)" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">TEST</a>
+<!--    <a onclick="updateInfoTest(80)" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">TEST</a>-->
 
     <br>
     <br>
@@ -70,13 +70,13 @@
                     ?>
                     <td><a class="btn btn-primary" href="/HistoryBook/<?= $book->id ?>/1">Chi tiết</a></td>
                     <td onmouseenter="an()">
-                        <a onclick="getInfo(<?= $book->id ?>)" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myShowModal">
+                        <a onclick="getInfo(<?= $book->id ?>)" href="#" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myShowModal">
                             <span style="color: #337ab7" class="glyphicon glyphicon-eye-open">
                             </span>
-                        </a>  <a onclick="updateInfo(<?= $book->id ?>)" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
+                        </a>  <a onclick="updateInfo(<?= $book->id ?>)" href="#" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
                             <span style="color: #337ab7" class="glyphicon glyphicon-pencil">
                             </span>
-                        </a> <a onclick="deleteB(<?= $book->id ?>)" data-method="post" data-pjax="0">
+                        </a> <a onclick="deleteB(<?= $book->id ?>)" href="#" data-method="post" data-pjax="0">
                             <span style="color: #337ab7" class="glyphicon glyphicon-trash">
                             </span>
                         </a>
@@ -157,7 +157,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -224,13 +224,11 @@
                         </div>
                         <div class="form-group form-model2">
                             <br><br>
-                            <div class="form-group form-model2">
-                                <button class="btn btn-primary cratebutton" onclick="updateB2()" data-dismiss="modal">chỉnh sửa</button>
-                            </div>
                             <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
 
                         </div>
                         <div class="modal-footer">
+                                 <button class="btn btn-success" onclick="updateB2()" data-dismiss="modal">chỉnh sửa</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -295,13 +293,11 @@
                             <label for="chọn sách">Ngày xuất bản</label>
                             <input class="form-control" name="publication" type="date">
                         </div>
-                        <br><br>
-                        <div class="form-group form-model2">
-                            <button class = "btn btn-primary cratebutton" type = "submit  data-dismiss="modal">Thêm sách</button>
-                        </div>
+                       
                         <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
 
                         <div class="modal-footer">
+                            <button class = "btn btn-success" type = "submit  data-dismiss="modal">Thêm sách</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         </div>
                     </form>

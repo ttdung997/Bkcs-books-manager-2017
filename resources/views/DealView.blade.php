@@ -35,9 +35,6 @@
                 <th>
                     <a href="#" data-sort="id">NgàyTrả</a>
                 </th>
-                <th>
-                    <a href="#" data-sort="id">Trạng thái</a>
-                </th>
                 <th class="action-column">&nbsp;</th>
                 <th class="action-column">&nbsp;</th>
             </tr>
@@ -51,30 +48,35 @@
                 ?>
                 <tr data-key="<?= $i ?>" id="ele<?= $deal->id ?>">
                     <td><?= $i ?></td>
-                    <td><?= $customer->name ?> <button onclick="getInfoC(<?= $customer->id ?>)" class="btn btn-primary" data-toggle="modal" data-target="#myCustomerModal">Chi tiết</button></td>
-                    <td><?= $book->name ?> <button onclick="getInfoB(<?= $book->id ?>)" class="btn btn-primary" data-toggle="modal" data-target="#myBookModal">Chi tiết</button></td>
+                    <td><a style="color: blue" onclick="getInfoC(<?= $customer->id ?>)" href="#"  data-toggle="modal" data-target="#myCustomerModal"><?= $customer->name ?> </a></td>
+                    <td><a style="color: blue" onclick="getInfoB(<?= $book->id ?>)" href="#" data-toggle="modal" data-target="#myBookModal"><?= $book->name ?> </a></td>
                     <td><?= $deal->lend_date ?></td>
                     <td><?= $deal->give_date ?></td>
-                    <?php
-                    if ($deal->status == 0)
-                        echo "<td>Đã trả</td>"
-                        . '<td><button class="btn btn-primary">Hoàn thành</button>';
-                    else
-                        echo "<td>Chưa trả</td>"
-                        . ' <td><button class="btn btn-primary" onclick="DealEnd(' . $deal->id . ')">Trả sách</button></td>';
-                    ?>
+
 
                     <td onmouseenter="an()">
-                        <a onclick="getInfo(<?= $deal->id ?>)" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myViewModal">
+                        <a onclick="getInfo(<?= $deal->id ?>)" href="#" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myViewModal">
                             <span style="color: #337ab7" class="glyphicon glyphicon-eye-open">
                             </span>
-                        </a>  <a onclick="updateInfo(<?= $deal->id ?>)" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
+                        </a>  <a onclick="updateInfo(<?= $deal->id ?>)" href="#" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
                             <span style="color: #337ab7" class="glyphicon glyphicon-pencil">
                             </span>
-                        </a> <a onclick="deleteD(<?= $deal->id ?>)" data-method="post" data-pjax="0">
+                        </a> <a onclick="deleteD(<?= $deal->id ?>)" href="#" data-method="post" data-pjax="0">
                             <span style="color: #337ab7" class="glyphicon glyphicon-trash">
                             </span>
                         </a>
+                        <?php
+                        if ($deal->status == 0)
+                            echo '<a onClick="alert(&#39Không thể trả sách,giao dịch đã hoàn thành từ trước&#39)" href="#" data-method="post" data-pjax="0">
+                            <span style="color: #2ab27b" class="glyphicon glyphicon-flag">
+                            </span>
+                        </a>';
+                        else
+                            echo '<a  onclick="DealEnd(' . $deal->id . ')"  href="#" data-method="post" data-pjax="0">
+                            <span style="color: red" class="glyphicon glyphicon-flag">
+                            </span>
+                        </a>';
+                        ?>
                     </td>
                 </tr>
                 <?php
@@ -113,25 +115,17 @@
                                 <option value="DESC">Giảm dần</option>
                             </select>
                         </div>
-                        <div class="form-group form-model2">
-                            <label for="chọn sách">Chọn trang</label>
-                            <select class="form-control" name="page">
-                                <?php
-                                for ($i = 1; $i <= intval(($count - 1) / 5) + 1; $i++) {
-                                    ?>
-                                    <option value="<?= $i ?>">Trang <?= $i ?></option>
-                                    <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <button class="btn btn-primary cratebutton" type="submit">Lọc</button>
-                    </form>
-                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary " data-dismiss="modal">Thoát</button>
+                        <input name="page" type="hidden" value="1">
 
+                        <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+
+                        <div class="modal-footer">
+                            <button class="btn btn-success" type="submit">Lọc</button>
+                            <button type="button" class="btn btn-primary " data-dismiss="modal">Thoát</button>
+
+                        </div>
+
+                    </form>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -141,39 +135,36 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Xuất dữ liệu theo tháng</h4>
+                    <h4 class="modal-title">Xuất dữ liệu</h4>
 
                 </div>
                 <div class="modal-body">
                     <br>
-                    <form action="/CustomerExport" method="post" accept-charset = "UTF-8" class = "form" >
+                    <form action="/DealExport" method="get" accept-charset = "UTF-8" class = "form" >
                         <input name = "_token" type = "hidden" value = "<?= csrf_token() ?>">
                         <div class="form-group form-model2">
-                            <label for="chọn sách">Chọn tháng</label>
-                            <select required="" class="form-control" name="month">
-                                <?php
-                                for ($i = 1; $i < 13; $i++) {
-                                    ?>
-                                    <option value="<?= $i ?>">Tháng <?= $i ?></option>
-                                    <?php
-                                }
-                                ?>
-                            </select>
+                            <label for="ngày trả"> Từ Ngày</label>
+                            <?php
+                            $date2 = \Carbon\Carbon::now();
+                            $date1 = \Carbon\Carbon::now()->subMonth();
+                            ;
+                            ?>
+                            <input class="form-control" name="date1" type="date" value="<?= $date1->toDateString(); ?>">
                         </div>
                         <div class="form-group form-model2">
-                            <label for="chọn sách">Chọn Năm</label>
-                            <select required="" class="form-control" name="year">
-                                <option value="2016"> Năm 2016 </option>
-                                <option value="2017"> Năm 2017</option></select>
+                            <label for="ngày trả">Đến Ngày</label>
+                            <input class="form-control" name="date2" type="date" value="<?= $date2->toDateString(); ?>">
+                        </div>
+
+                        <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" >Xuất dự liệu</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+
 
                         </div>
-                        <button type="submit" class="btn btn-primary cratebutton" >Xuất dự liệu</button>
                     </form>
-                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -201,15 +192,15 @@
                             <label for="ngày trả">Ngày Trả</label>
                             <input class="form-control" name="give_date" type="date">
                         </div>
-                        <div class="form-group form-model2">
-                            <button class="btn btn-primary cratebutton" onclick="updateD()" data-dismiss="modal">chỉnh sửa</button>
+
+                        <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+
+                        <div class="modal-footer">
+                            <button class="btn btn-success" onclick="updateD()" data-dismiss="modal">chỉnh sửa</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+
                         </div>
                     </form>
-                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -261,15 +252,15 @@
                             <label for = "ngày trả">Ngày Trả</label>
                             <input class = "form-control" name = "Pay_date" type = "date" value = <?= date("Y-m-d") ?> >
                         </div>
-                        <div class = "form-group form-model2">
-                            <button class = "btn btn-primary cratebutton" onclick = "insertD()" data-dismiss = "modal">Thêm giao dịch</button>
+
+                        <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+
+
+                        <div class="modal-footer">
+                            <button class = "btn btn-success" onclick = "insertD()" data-dismiss = "modal">Thêm giao dịch</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
-                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

@@ -131,25 +131,24 @@
                             <input required="" class="form-control" placeholder="nhập chứng minh" name="cmt" type="text" value>
                         </div>
 
-                        <div class="form-group form-model2">
-                            <button class="btn btn-primary cratebutton" onclick="updateC()" data-dismiss="modal">chỉnh sửa</button>
+                        <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+
+                        <div class="modal-footer">
+                            <button class="btn btn-success" onclick="updateC()" data-dismiss="modal">chỉnh sửa</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
                         </div>
                     </form>
-                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
-                </div>
+                </div>  
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="myExcelModal">
+     <div class="modal fade" tabindex="-1" role="dialog" id="myExcelModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Xuất dữ liệu theo tháng</h4>
+                    <h4 class="modal-title">Xuất dữ liệu</h4>
 
                 </div>
                 <div class="modal-body">
@@ -157,31 +156,28 @@
                     <form action="/CustomerExport" method="post" accept-charset = "UTF-8" class = "form" >
                         <input name = "_token" type = "hidden" value = "<?= csrf_token() ?>">
                         <div class="form-group form-model2">
-                            <label for="chọn sách">Chọn tháng</label>
-                            <select required="" class="form-control" name="month">
-                                <?php
-                                for ($i = 1; $i < 13; $i++) {
-                                    ?>
-                                <option value="<?=$i?>">Tháng <?=$i?></option>
-                                    <?php
-                                }
-                                ?>
-                            </select>
+                            <label for="ngày trả"> Từ Ngày</label>
+                            <?php
+                            $date2 = \Carbon\Carbon::now();
+                            $date1 = \Carbon\Carbon::now()->subMonth();
+                            ;
+                            ?>
+                            <input class="form-control" name="date1" type="date" value="<?= $date1->toDateString(); ?>">
                         </div>
                         <div class="form-group form-model2">
-                            <label for="chọn sách">Chọn Năm</label>
-                            <select required="" class="form-control" name="year">
-                                <option value="2016"> Năm 2016 </option>
-                                <option value="2017"> Năm 2017</option></select>
+                            <label for="ngày trả">Đến Ngày</label>
+                            <input class="form-control" name="date2" type="date" value="<?= $date2->toDateString(); ?>">
+                        </div>
+
+                        <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" >Xuất dự liệu</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+
 
                         </div>
-                        <button type="submit" class="btn btn-primary cratebutton" >Xuất dự liệu</button>
                     </form>
-                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -212,15 +208,13 @@
                             <input required="" class="form-control" placeholder="nhập chứng minh thư" name="cmt" type="text" >
                         </div>
 
-                        <div class="form-group form-model2">
-                            <button class="btn btn-primary cratebutton" onclick="insertC()" data-dismiss="modal">Thêm Người dùng</button>
+                        <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
+
+                        <div class="modal-footer"> 
+                            <button class="btn btn-success" onclick="insertC()" data-dismiss="modal">Thêm Người dùng</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
                         </div>
                     </form>
-                    <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

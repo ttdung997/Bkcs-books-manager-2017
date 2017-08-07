@@ -51,39 +51,11 @@ class ExcelController extends Controller {
         })->download('xls');
     }
 
-    public function seleteDate() {
-        $info = "";
-        $info = ' <label>Chọn dữ liệu theo tháng trong năm</label>
-            <br>
-                <form action="http://35.192.32.4/CustomerExport" method="post" accept-charset = "UTF-8" class = "form" >
-                <input name = "_token" type = "hidden" value = "' . csrf_token() . '"">
-                <input name="_token" type="hidden" value="' . csrf_token() . '">
-                <div class="form-group form-model2">
-    <label for="chọn sách">Chọn tháng</label>
-    <select required="" class="form-control" name="month">';
-        for ($i = 1; $i < 13; $i++) {
-            $info = $info . '<option value="' . $i . '"> Tháng ' . $i . '</option>';
-        }
-        $info = $info . '</select>
-</div>
-<div class="form-group form-model2">
-    <label for="chọn sách">Chọn Năm</label>
-    <select required="" class="form-control" name="year">
-    <option value="2016"> Năm 2016 </option>
-        <option value="2017"> Năm 2017</option></select>
-         
-</div>
-<button type="submit" class="btn btn-primary cratebutton" >Xuất dự liệu</button>
-</form>';
-        return response()->json(array('info' => $info), 200);
-    }
-
     public function CustomerExport(Request $request) {
         //echo $request->year.'-'.$request->month.'<br>';
-        $from = Carbon::createFromDate($request->year, $request->month, '01');
-        $to = Carbon::createFromDate($request->year, $request->month, '30');
+
         $customer = DB::table('customer')
-                        ->whereBetween('created_at', array($from, $to))->where('check', '<>', 1)->get();
+                        ->whereBetween('created_at', array($request->date1, $request->date2))->where('check', '<>', 1)->get();
 
         if (strlen($customer) > 3) {
             $i = 1;
@@ -101,11 +73,11 @@ class ExcelController extends Controller {
                 $excel->setCreator('admin')->setCompany('BKCS');
                 $excel->setDescription('bảng thống kê ');
                 $excel->sheet('Sheet 1', function($cell) use ($data) {
-                 $title = array('danh sách khách hàng mượn sách');
-                   
+                    $title = array('danh sách khách hàng mượn sách');
+
                     $headings = array('id', 'Tên khách hàng', 'Số điện thoại', 'Chứng minh thư',);
                     // Font family
-                    
+
                     $cell->setFontFamily('Calibri');
                     $cell->fromArray($data, null, 'A1', false, false);
                     $cell->prependRow(1, $headings);
@@ -120,6 +92,61 @@ class ExcelController extends Controller {
                         'E' => 30,
                         'F' => 20,
                         'G' => 20
+                    ));
+// Set alignment to center
+                });
+            })->export('xls');
+        } else {
+            $data['msg'] = "không thể trích xuất dữ liệu";
+            return view('Error', $data);
+        }
+    }
+
+    public function DealExport(Request $request) {
+        //echo $request->year.'-'.$request->month.'<br>';
+
+        $deal = DB::table('book_deal')
+                        ->whereBetween('created_at', array($request->date1, $request->date2))->where('status', '<>', 1)->get();
+
+        if (strlen($deal) > 3) {
+            $i = 1;
+            foreach ($deal as $deal) {
+                $customer = DB::table('customer')->where('id', $deal->customer_id)->first();
+                $book = DB::table('book')->where('id', $deal->book_id)->first();
+                if($deal->status == 0)$status="Đã trả";
+                else $status="Chưa trả";
+                $data[] = array(
+                    $i,
+                    $customer->name,
+                    $book->name,
+                    $deal->lend_date,
+                    $deal->give_date,
+                    $status,
+                );
+                $i++;
+            }
+            Excel::create('Dữ liệu khách hàng', function($excel) use ($data) {
+                $excel->setTitle('Bảng giao dịch khách hàng');
+                $excel->setCreator('admin')->setCompany('BKCS');
+                $excel->setDescription('bảng thống kê ');
+                $excel->sheet('Sheet 1', function($cell) use ($data) {
+                    $title = array('danh sách khách hàng mượn sách');
+
+                    $headings = array('id', 'Tên khách hàng', 'Tên sách', 'Ngày mượn', 'Ngày trả','Trạng Thái');
+                    // Font family
+
+                    $cell->setFontFamily('Calibri');
+                    $cell->fromArray($data, null, 'A1', false, false);
+                    $cell->prependRow(1, $headings);
+                    $cell->setPageMargin(array(
+                        0.25, 0.30, 0.25, 0.30
+                    ));
+                    $cell->setWidth(array(
+                        'A' => 5,
+                        'B' => 40,
+                        'C' => 40,
+                        'D' => 30,
+                        'E' => 30,
                     ));
 // Set alignment to center
                 });
