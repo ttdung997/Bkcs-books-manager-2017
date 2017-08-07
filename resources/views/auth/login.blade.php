@@ -56,9 +56,7 @@
                                 <a href="/auth/facebook">
                                     <img style="width: 190px;" src="{{URL::asset('images/facebook-login.png')}}">
                                 </a>
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Quân Mật Khẩu?
-                                </a>
+                              
                             </div>
                             <?php
                             if (isset(Auth::user()->name)) {
