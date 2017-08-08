@@ -119,3 +119,42 @@ Stack trace:
   thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "GET /updateinfoB/78?_token%20=%20uiH2vy6tAqRzCKeRBRzY6SEbSRRXKrjy5fhp6U1H HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev", referrer: "http://lara.dev/Bookview/1"
 2017/08/07 08:21:33 [error] 1051#1051: *37 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /var/www/html/blog/app/Http/Controllers/MyFirstController.php on line 6" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "POST /mselect HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev", referrer: "http://lara.dev/uploadimg"
 2017/08/07 08:21:35 [error] 1051#1051: *37 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /var/www/html/blog/app/Http/Controllers/MyFirstController.php on line 6" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "POST /mselect HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev", referrer: "http://lara.dev/uploadimg"
+2017/08/08 10:52:59 [error] 1055#1055: *367 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to a member function send() on null in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:112
+Stack trace:
+#0 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(89): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#2 {main}
+  thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112
+PHP message: PHP Fatal error:  Uncaught Error: Call to a member function send() on null in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:112
+Stack trace:
+#0 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(89): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#1 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#2 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#3 {main}
+  thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "GET /DealView/1 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev", referrer: "http://lara.dev/TypeTagManager"
+2017/08/08 10:53:08 [error] 1055#1055: *367 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to a member function send() on null in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:112
+Stack trace:
+#0 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(89): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#2 {main}
+  thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112
+PHP message: PHP Fatal error:  Uncaught Error: Call to a member function send() on null in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:112
+Stack trace:
+#0 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(89): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#1 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#2 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#3 {main}
+  thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "GET /DealView/1 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev"
+2017/08/08 10:53:08 [error] 1055#1055: *367 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Call to a member function send() on null in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:112
+Stack trace:
+#0 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(89): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#2 {main}
+  thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112
+PHP message: PHP Fatal error:  Uncaught Error: Call to a member function send() on null in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:112
+Stack trace:
+#0 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(89): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#1 /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(123): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#2 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#3 {main}
+  thrown in /var/www/html/blog/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php on line 112" while reading response header from upstream, client: 127.0.0.1, server: lara.dev, request: "GET /DealView/1 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "lara.dev"

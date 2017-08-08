@@ -45,7 +45,7 @@ class DealController extends Controller {
         $data['page'] = $n;
         $data['name'] = "HistoryCustomer";
         $data['id'] = $id;
-        $data['link'] = $data['name'] . "/" . $data['id']. "/";
+        $data['link'] = $data['name'] . "/" . $data['id'] . "/";
         $data['count'] = DB::table('book_deal')->where('customer_id', $id)->where('status', '<>', 1)->count();
         if ($n > 0 && $n <= ($data['count']) / 5 + 1) {
             $book_deal = DB::table('book_deal')->where('customer_id', $id)->where('status', '<>', 1)->offset(( $n - 1) * 5)->take(5)->get();
@@ -114,7 +114,7 @@ class DealController extends Controller {
         $deal = DB::table('book_deal')->where('id', $n)->first();
         list($yearl, $monthl, $dayl) = explode('-', $deal->lend_date);
         list($yearg, $monthg, $dayg) = explode('-', $deal->give_date);
-        $id=$deal->id;
+        $id = $deal->id;
         return response()->json(array(
                     'yearl' => $yearl,
                     'monthl' => $monthl,
@@ -124,46 +124,54 @@ class DealController extends Controller {
                     'dayg' => $dayg,
                     'id' => $id,
                         ), 200);
-
     }
 
     public function updateD() {
-        $que = DB::table('book_deal')
-                ->where('id', $_POST['id'])
-                ->update([
-            'lend_date' => $_POST['lend_date'],
-            'give_date' => $_POST['give_date'],
-        ]);
-        if ($que) {
-            $msg = "Đã  cập nhật dữ liệu thành công ";
-            $checkerror = 0;
-        } else {
-            $msg = "Đã có lỗi trong quá trình cập nhật ";
-            $checkerror = 1;
-        }
-
+            $que = DB::table('book_deal')
+                    ->where('id', $_POST['id'])
+                    ->update([
+                'give_date' => $_POST['give_date'],
+            ]);
+            if ($que) {
+                $msg = "Đã  cập nhật dữ liệu thành công ";
+                $checkerror = 0;
+            } else {
+                $msg = "Đã có lỗi trong quá trình cập nhật ";
+                $checkerror = 1;
+            }
+        
         return response()->json(array('msg' => $msg, 'checkerror' => $checkerror), 200);
     }
 
     public function insertD() {
-        $query = DB::table('book_deal')->insert([
-            [
-                'customer_id' => $_POST['customer_id'],
-                'book_id' => $_POST[
-                'book_id'],
-                'lend_date' => $_POST['Lend_date'],
-                'give_date' => $_POST['Pay_date'],
-                'status' => 2,
-            ]
-        ]);
-        $query = DB::table('book')->where('id', $_POST['book_id'])->update(['check' => 2]);
-        $query = DB::table('customer')->where('id', $_POST['customer_id'])->first();
-        $BN = $query->BookNumber + 1;
-        $query = DB::table('customer')->where('id', $_POST['customer_id'])->update(['BookNumber' => $BN]);
-        $msg = "Đã thêm giao dịch thành công";
-        $insert_line = '';
+        if ($_POST['Lend_date'] > $_POST['Pay_date']) {
+            $msg = "Ngày trả phải bé hơn ngày nhận";
+            $insertCheck = 0;
+        } else {
+            $queryInsert = DB::table('book_deal')->insert([
+                [
+                    'customer_id' => $_POST['customer_id'],
+                    'book_id' => $_POST[
+                    'book_id'],
+                    'lend_date' => $_POST['Lend_date'],
+                    'give_date' => $_POST['Pay_date'],
+                    'status' => 2,
+                ]
+            ]);
+            $query = DB::table('book')->where('id', $_POST['book_id'])->update(['check' => 2]);
+            $query = DB::table('customer')->where('id', $_POST['customer_id'])->first();
+            $BN = $query->BookNumber + 1;
+            $query = DB::table('customer')->where('id', $_POST['customer_id'])->update(['BookNumber' => $BN]);
+            if ($queryInsert) {
+                $msg = "Đã thêm giao dịch thành công";
+                $insertCheck = 1;
+            } else {
+                $msg = "Đã có lỗi khi thêm giao dịch";
+                $insertCheck = 0;
+            }
+        }
 
-        return response()->json(array('msg' => $msg, 'insert_line' => $insert_line), 200);
+        return response()->json(array('msg' => $msg, 'insertCheck' => $insertCheck), 200);
     }
 
     public function deleteD($n) {
@@ -221,7 +229,6 @@ class DealController extends Controller {
                     'status' => $status,
                     'deal' => $deal,
                         ), 200);
-       
     }
 
 }

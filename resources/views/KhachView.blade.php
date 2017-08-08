@@ -224,9 +224,10 @@
         <form action="/pageNumberC" method="get">
 
             <label>Trang: </label>
-            <input style="width: 20px;s" class="inputnumber" name="number" type="text">
+            <input style="width: 20px;" class="inputnumber" name="number" type="text">
             <input type="submit" hidden>
             <b class="pages">Trang <?= $page ?> / <?= intval(($count - 1) / 5) + 1 ?></b>
+            <a class="paginate_button" href="/khachview/1">« Đầu</a>
             <?php if ($page != 1) { ?><a class="paginate_button previous disabled" href="/khachview/<?= $page - 1 ?>">« Trước</a><?php } ?>
             <?php
             for ($i = $page - 1; $i <= $page - 1; $i++) {
@@ -244,7 +245,7 @@
                 <a class="paginate_button" href="/khachview/<?= $i ?>"><?= $i ?></a>
             <?php } ?>
             <?php if ($page != intval(($count - 1) / 5) + 1) { ?><a class="paginate_button previous disabled" href="/khachview/<?= $page + 1 ?>" >Sau »</a><?php } ?>
-
+            <a class="paginate_button" href="/khachview/<?= intval(($count - 1) / 5) + 1 ?>">Cuối »</a>
         </form>
 
     </div>

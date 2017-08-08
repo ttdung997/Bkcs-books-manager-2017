@@ -4,29 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/grid.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/version.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/detector.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/formatinf.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/errorlevel.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/bitmat.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/datablock.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/bmparser.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/datamask.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/rsdecoder.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/gf256poly.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/gf256.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/decoder.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/qrcode.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/findpat.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/alignpat.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/QrCode/databr.js') }}"></script>
         <link rel="shortcut icon" href="{{URL::asset('images/logo.png')}}" />
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.css') }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+<!--        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">-->
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -112,12 +94,12 @@
 
         <!-- Scripts -->
 
-        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+<!--        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>-->
         <script type="text/javascript" src="{{ URL::asset('js/jquery.tinycarousel.min.js') }}"></script>
         <script type="text/javascript" src="{{ URL::asset('js/script.js') }}"></script>
         <script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
-        <script src="{{ asset('js/app.js') }}"></script>
+<!--        <script src="{{ asset('js/app.js') }}"></script>-->
 
     </body>
 </html>

@@ -1,6 +1,25 @@
 @extends('layouts.check')
 @extends('layouts.app')
 @section('content')
+
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/grid.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/version.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/detector.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/formatinf.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/errorlevel.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/bitmat.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/datablock.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/bmparser.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/datamask.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/rsdecoder.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/gf256poly.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/gf256.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/decoder.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/qrcode.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/findpat.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/alignpat.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/QrCode/databr.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/QrCode/webqr.js') }}"></script>
 <link rel="stylesheet" href="{{ URL::asset('css/QrCode.css') }}">
 </head>

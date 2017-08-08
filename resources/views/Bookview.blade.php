@@ -216,7 +216,7 @@
                         </div>
                         <div class="form-group form-model2">
                             <label for="mô tả">Nhập mô tả</label>
-                            <input required="" class="form-control" placeholder="nhập mô tả.." name="des" type="text">
+                            <textarea class="form-control" placeholder="nhập mô tả.." name="des"  rows="3"></textarea>
                         </div> 
                         <div class="form-group form-model2">
                             <label for="chọn sách">Ngày xuất bản</label>
@@ -312,8 +312,9 @@
             <label>Trang: </label>
             <input style="width: 20px;s" class="inputnumber" name="number" type="text">
             <input  type="submit" hidden>
-
+            
             <b class="pages">Trang <?= $page ?> / <?= intval(($count - 1) / 5) + 1 ?></b>
+             <a class="paginate_button" href="/Bookview/1">« Đầu</a>
             <?php if ($page != 1) { ?><a class="paginate_button previous disabled" href="/Bookview/<?= $page - 1 ?>">« Trước</a><?php } ?>
             <?php
             for ($i = $page - 1; $i <= $page - 1; $i++) {
@@ -331,7 +332,7 @@
                 <a class="paginate_button" href="/Bookview/<?= $i ?>"><?= $i ?></a>
             <?php } ?>
             <?php if ($page != intval(($count - 1) / 5) + 1) { ?><a class="paginate_button previous disabled" href="/Bookview/<?= $page + 1 ?>" >Sau »</a><?php } ?>
-
+            <a class="paginate_button" href="/Bookview/<?= intval(($count - 1) / 5) + 1 ?>">Cuối »</a>
         </form>
     </div>
 </div>

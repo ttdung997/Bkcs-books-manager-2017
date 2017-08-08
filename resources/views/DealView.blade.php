@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <br>
 
-    <button type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myInsertModal">Thêm đầu sách</button>
+    <button type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myInsertModal">Thêm giao dịch</button>
     <a  type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#myExcelModal">Xuất dữ liệu </a>
     <a  type="button" class="btn btn-primary" data-pjax="0" data-toggle="modal" data-target="#mySortModal">Bộ lọc</a>
 
@@ -33,7 +33,7 @@
                     <a href="#" data-sort="id">Ngày mượn</a>
                 </th>
                 <th>
-                    <a href="#" data-sort="id">NgàyTrả</a>
+                    <a href="#" data-sort="id">Ngày Trả</a>
                 </th>
                 <th class="action-column">&nbsp;</th>
                 <th class="action-column">&nbsp;</th>
@@ -51,17 +51,34 @@
                     <td><a style="color: blue" onclick="getInfoC(<?= $customer->id ?>)" href="#"  data-toggle="modal" data-target="#myCustomerModal"><?= $customer->name ?> </a></td>
                     <td><a style="color: blue" onclick="getInfoB(<?= $book->id ?>)" href="#" data-toggle="modal" data-target="#myBookModal"><?= $book->name ?> </a></td>
                     <td><?= $deal->lend_date ?></td>
-                    <td><?= $deal->give_date ?></td>
+                    <?php
+                    if ($deal->given_date !== '0000-00-00') {
+                        echo '<td>' . $deal->given_date . '</td>';
+                    } else {
+                        echo '<td>' . $deal->give_date . '</td>';
+                    }
+                    ?>
 
 
                     <td onmouseenter="an()">
                         <a onclick="getInfo(<?= $deal->id ?>)" href="#" aria-label="View" data-pjax="0" data-toggle="modal" data-target="#myViewModal">
                             <span style="color: #337ab7" class="glyphicon glyphicon-eye-open">
                             </span>
-                        </a>  <a onclick="updateInfo(<?= $deal->id ?>)" href="#" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
+                        </a>
+                        <?php
+                        if ($deal->status == 0)
+                            echo '<a title="Update" aria-label="Update">
+                            <span style="color: #337ab7" class="glyphicon glyphicon-saved">
+                            </span>
+                        </a>';
+                        else
+                            echo '<a onclick="updateInfo('.$deal->id .')" href="#" title="Update" aria-label="Update" data-pjax="0" data-toggle="modal" data-target="#myUpdateModal">
                             <span style="color: #337ab7" class="glyphicon glyphicon-pencil">
                             </span>
-                        </a> <a onclick="deleteD(<?= $deal->id ?>)" href="#" data-method="post" data-pjax="0">
+                        </a>';
+                        ?>
+                        
+                        <a onclick="deleteD(<?= $deal->id ?>)" href="#" data-method="post" data-pjax="0">
                             <span style="color: #337ab7" class="glyphicon glyphicon-trash">
                             </span>
                         </a>
@@ -174,7 +191,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Sửa giao dịch</h4>
+                    <h4 class="modal-title">Gia hạn giao dịch</h4>
 
                 </div>
                 <div class="modal-body">
@@ -183,11 +200,6 @@
                         <input name="_token" type="hidden" value="<?= csrf_token() ?>">
 
                         <input name="id" type="hidden">
-                        <div class="form-group form-model2">
-                            <label for="ngày mượn">Ngày Mượn</label>
-                            <input class="form-control" name="lend_date" type="date">
-
-                        </div>
                         <div class="form-group form-model2">
                             <label for="ngày trả">Ngày Trả</label>
                             <input class="form-control" name="give_date" type="date">
@@ -245,12 +257,13 @@
                         </div>
                         <div class = "form-group form-model2">
                             <label for = "ngày mượn">Ngày Mượn</label>
-                            <input class = "form-control" name = "Lend_date" type = "date" value = <?= date("Y-m-d") ?> >
+                            <span><?= date("Y-m-d") ?></span>
+                            <input class = "form-control" name = "Lend_date" type = "date" style="display: none;" value = <?= date("Y-m-d") ?>  >
 
                         </div>
                         <div class = "form-group form-model2">
                             <label for = "ngày trả">Ngày Trả</label>
-                            <input class = "form-control" name = "Pay_date" type = "date" value = <?= date("Y-m-d") ?> >
+                            <input class = "form-control" name = "Pay_date" type = "date" value = <?= \Carbon\Carbon::now()->addWeek()->toDateString() ?> >
                         </div>
 
                         <img id="loading" style="display: none;padding-left: 26%;" src="{{URL::asset('images/loading.gif')}}">
@@ -405,6 +418,7 @@
         <input  type="text" value="<?= $name ?>" name="name" hidden>
         <input  type="text" value="<?= $id ?>" name="id" hidden>
         <b class="pages">Trang <?= $page ?> / <?= intval(($count - 1) / 5) + 1 ?></b>
+        <a class="paginate_button" href="/<?= $link ?>1">« Đầu</a>
         <?php if ($page != 1) { ?><a class="paginate_button previous disabled" href="/<?= $link ?><?= $page - 1 ?>">« Trước</a><?php } ?>
         <?php
         for ($i = $page - 1; $i <= $page - 1; $i++) {
@@ -422,7 +436,7 @@
             <a class="paginate_button" href="/<?= $link ?><?= $i ?>"><?= $i ?></a>
         <?php } ?>
         <?php if ($page != intval(($count - 1) / 5) + 1) { ?><a class="paginate_button previous disabled" href="/<?= $link ?><?= $page + 1 ?>" >Sau »</a><?php } ?>
-
+        <a class="paginate_button" href="/<?= $link ?><?= intval(($count - 1) / 5) + 1 ?>">Cuối »</a>
     </form>
 
 </div>
@@ -468,7 +482,6 @@
             url: '/updateinfoD/' + n,
             data: '_token = <?php echo csrf_token() ?>',
             success: function (data) {
-                document.getElementsByName('lend_date')[0].value = (data.yearl + "-" + data.monthl + "-" + data.dayl);
                 document.getElementsByName('give_date')[0].value = (data.yearg + "-" + data.monthg + "-" + data.dayg);
                 document.getElementsByName('id')[0].value = (data.id);
             }
@@ -477,9 +490,7 @@
     function updateD() {
         function updatechange(id) {
             var data = document.getElementById("ele" + id);
-            var Ldate = document.getElementsByName('lend_date')[0].value.toString();
             var Gdate = document.getElementsByName('give_date')[0].value.toString();
-            data.children[3].textContent = Ldate;
             data.children[4].textContent = Gdate;
         }
         document.getElementById('loading').style.display = "block";
@@ -537,10 +548,15 @@
             success: function (data) {
                 document.getElementById('msg').classList.remove("hidden");
                 $("#msg").html(data.msg);
-                $("#insert_line").html(data.insert_line);
-                setTimeout(function () {
-                    location.reload();
-                }, 100);
+                if (data.insertCheck) {
+                    setTimeout(function () {
+
+                        location.reload();
+                    }, 100);
+                } else {
+                    document.getElementById('msg').classList.remove("alert-success");
+                    document.getElementById('msg').classList.add("alert-danger");
+                }
             }
         });
     }
@@ -575,7 +591,7 @@
                 success: function (data) {
                     $("#msg").html(data.msg);
                     var data = document.getElementById("ele" + n);
-                    data.children[5].textContent = 'Đã trả';
+                    data.children[6].textContent = 'Đã trả';
                     document.getElementById('msg').classList.remove("hidden");
                 }
             });
